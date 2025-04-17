@@ -3,7 +3,7 @@ package com.hackathon.app
 import java.time.LocalDate;
 import java.util.List;
 
-class Hackathon {
+public class Hackathon {
     protected String titolo;
     protected String sede;
     protected LocalDate dataInizio;
@@ -12,7 +12,7 @@ class Hackathon {
     protected int dimensioneTeam;
 }
 
-class Utente {
+public class Utente {
     protected String nome;
     protected String cognome;
     protected LocalDate dataNascita;
@@ -22,35 +22,35 @@ class Utente {
     public Utente SignIn(email String, password String);
 }
 
-class Organizzatore extends Utente {
+public class Organizzatore extends Utente {
     public LocalDate AperturaIscrizioni (data LocalDate);
     public LocalDate ChiusuraIscrizioni (data LocalDate);
     public String Invito(email String);
 }
 
-class Giudice extends Utente {
+public class Giudice extends Utente {
     public String DescrizioneProblema();
 }
 
-class Partecipante extends Utente {
+public class Partecipante extends Utente {
     public String Invita(email String);
     public String AccettaInvito();
     public String RifiutaInvito();
 }
 
-class Documento {
+public class Documento {
     protected LocalDate data;
     protected String documento;
     protected String modificaDocumento(nuovoDocumento String);
 }
 
-class Voto {
+public class Voto {
     protected int voto;
     private int assegnazioneVoto();
     public String PubblicazioneClassifica();
 }
 
-class Team {
+public class Team {
     protected String nome;
     protected Voto voto;
     protected List<Partecipante> partecipanti;
