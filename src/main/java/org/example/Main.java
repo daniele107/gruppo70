@@ -1,17 +1,57 @@
-package org.example;
+package com.hackathon.app
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.time.LocalDate;
+import java.util.List;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
-    }
+class Hackathon {
+    protected String titolo;
+    protected String sede;
+    protected LocalDate dataInizio;
+    protected LocalDate dataFine;
+    protected int massimoPartecipanti;
+    protected int dimensioneTeam;
+}
+
+class Utente {
+    protected String nome;
+    protected String cognome;
+    protected LocalDate dataNascita;
+    protected String email;
+    protected String password;
+    public Utente Registrazione(nome String, cognome String, dataNascita LocalDate, email String, password String);
+    public Utente SignIn(email String, password String);
+}
+
+class Organizzatore extends Utente {
+    public LocalDate AperturaIscrizioni (data LocalDate);
+    public LocalDate ChiusuraIscrizioni (data LocalDate);
+    public String Invito(email String);
+}
+
+class Giudice extends Utente {
+    public String DescrizioneProblema();
+}
+
+class Partecipante extends Utente {
+    public String Invita(email String);
+    public String AccettaInvito();
+    public String RifiutaInvito();
+}
+
+class Documento {
+    protected LocalDate data;
+    protected String documento;
+    protected String modificaDocumento(nuovoDocumento String);
+}
+
+class Voto {
+    protected int voto;
+    private int assegnazioneVoto();
+    public String PubblicazioneClassifica();
+}
+
+class Team {
+    protected String nome;
+    protected Voto voto;
+    protected List<Partecipante> partecipanti;
 }
