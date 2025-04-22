@@ -10,6 +10,6 @@ public class Invito {
   public LocalDate getDataInvio();
   public void setDataInvio(LocalDate dataInvio);
   
-  public String AccettaInvito();
-  public String RifiutaInvito();
+  public Partecipante AccettaInvito();
+  public void RifiutaInvito();
 }
