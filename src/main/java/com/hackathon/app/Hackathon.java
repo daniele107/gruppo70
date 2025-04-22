@@ -1,19 +1,28 @@
 package com.hackathon.app;
 
 import java.time.LocalDate;
-import java.util.Scanner;
+
 public class Hackathon {
-    protected String titolo;
-    protected String sede;
-    protected LocalDate dataInizio;
-    protected LocalDate dataFine;
-    protected int massimoPartecipanti;
-    protected int dimensioneTeam;
-    public static void  main(String[] args){
-        Utente a = new Organizzatore();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("inserisci un nome");
-       a.nome =scanner.nextLine();
-       System.out.println(a.nome);
-    }
+    private String titolo;
+    private String sede;
+    private LocalDate dataInizio;
+    private LocalDate dataFine;
+    private int massimoPartecipanti;
+    private int dimensioneTeam;
+
+    public Hackathon(String titolo, String sede, LocalDate dataInizio, LocalDate dataFine, int massimoPartecipanti, int dimensioneTeam);
+    public String getTitolo();
+    public void setTitolo(String titolo);
+    public String getSede();
+    public void setSede(String sede);
+    public LocalDate getDataInizio();
+    public void setDataInizio(LocalDate dataInizio);
+    public LocalDate getDataFine();
+    public void setDataFine(LocalDate dataFine);
+    public int getMassimoPartecipanti();
+    public void setMassimoPartecipanti(int massimoPartecipanti);
+    public int getDimensioneTeam();
+    public void setDimensioneTeam(int dimensioneTeam);
+    
+    public static void main(String[] args);
 }
