@@ -3,19 +3,25 @@ package com.hackathon.app;
 import java.time.LocalDate;
 
 public class Utente {
-    protected String nome;
-    protected String cognome;
-    protected LocalDate dataNascita;
-    protected String email;
-    protected String password;
-/*
-    public Utente Registrazione(nome String, cognome String, dataNascita LocalDate, email String, password String) {
-        return null;
-    }
+    private String nome;
+    private String cognome;
+    private LocalDate dataNascita;
+    private String email;
+    private String password;
 
-    public Utente SignIn(email String, password String) {
-        return null;
-    }
-    */
+    public Utente Utente(String nome, String cognome, LocalDate dataNascita, String email, String passowrd);
+    
+    public Utente Registrazione(String nome, String cognome, LocalDate dataNascita, String email, String password);
+    public Utente SignIn(String email, String password);
 
+    public String getNome();
+    public void setNome(String nome);
+    public String getCognome();
+    public void setCognome(String cognome);
+    public LocalDate getDataNascita();
+    public void setDataNascita(LocalDate dataNascita);
+    public String getEmail();
+    public void setEmail(String email);
+    public String getPassword();
+    public void setPassword(String password);
 }
