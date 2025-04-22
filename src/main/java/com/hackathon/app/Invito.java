@@ -6,6 +6,6 @@ public class Invito {
   
   public Invito(String messaggio, LocalDate dataInvio);
 
-  public String AccettaInvito();
-  public String RifiutaInvito();
+  public void AccettaInvito();
+  public void RifiutaInvito();
 }
