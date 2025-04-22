@@ -9,7 +9,7 @@ public class Utente {
     private String email;
     private String password;
 
-    public Utente Utente(String nome, String cognome, LocalDate dataNascita, String email, String passowrd);
+    public Utente(String nome, String cognome, LocalDate dataNascita, String email, String passowrd);
     
     public Utente Registrazione(String nome, String cognome, LocalDate dataNascita, String email, String password);
     public Utente SignIn(String email, String password);
