@@ -1,13 +1,9 @@
 package com.hackathon.app;
 
 public class Voto {
-    protected int voto;
-
-    private int mediaVoto() {
-        return 0;
-    }
-
-    public String PubblicazioneClassifica(){
-        return "";
-    }
+    private int voto;
+    
+    public Voto(int voto);
+    public int getVoto();
+    public void setVoto(int voto);
 }
