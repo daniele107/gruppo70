@@ -7,9 +7,15 @@ public class Organizzatore extends Utente {
   }
 
   public LocalDate AperturaIscrizioni(LocalDate data){
+
     return data;
   }
   public LocalDate ChiusuraIscrizioni(LocalDate data){
+
     return data;
+  }
+
+  public String Invito(String email) {
+    return email;
   }
 }
