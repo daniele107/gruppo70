@@ -17,6 +17,6 @@ public class Main {
 
         Voto b = new Voto();
         b.voto=30;
-        System.out.println("Risultato: " + b.controllo_voto(b.voto));
+        System.out.println("Voto assegnato: " + b.controllo_voto(b.voto));
     }
 }

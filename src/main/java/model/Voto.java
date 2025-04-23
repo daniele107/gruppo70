@@ -10,7 +10,7 @@ public class Voto {
       return voto;
     } else {
       System.out.println("Errore");
-      return -1;
+      return voto=-1;
     }
   }
   public  int media_Voto(){
