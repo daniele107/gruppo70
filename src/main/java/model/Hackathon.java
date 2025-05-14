@@ -1,63 +1,53 @@
+
+// File: Hackathon.java
 package model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Hackathon {
     private String titolo;
     private String sede;
-    private LocalDateTime data_inizio;
-    private LocalDateTime data_fine;
-    private int massimo_partecipanti;
-    private int dimensione_team;
-    Organizzatore organizzatore;
+    private LocalDateTime dataInizio;
+    private LocalDateTime dataFine;
+    private int massimoPartecipanti;
+    private int dimensioneTeam;
+    private Organizzatore organizzatore;
 
     public Hackathon() {}
 
-    public String getTitolo() {
-        return titolo;
+    public String getTitolo() { return titolo; }
+    public void setTitolo(String titolo) { this.titolo = titolo; }
+
+    public String getSede() { return sede; }
+    public void setSede(String sede) { this.sede = sede; }
+
+    public LocalDateTime getDataInizio() { return dataInizio; }
+    public void setDataInizio(LocalDateTime dataInizio) { this.dataInizio = dataInizio; }
+
+    public LocalDateTime getDataFine() { return dataFine; }
+    public void setDataFine(LocalDateTime dataFine) { this.dataFine = dataFine; }
+
+    public int getMassimoPartecipanti() { return massimoPartecipanti; }
+    public void setMassimoPartecipanti(int massimoPartecipanti) { this.massimoPartecipanti = massimoPartecipanti; }
+
+    public int getDimensioneTeam() { return dimensioneTeam; }
+    public void setDimensioneTeam(int dimensioneTeam) { this.dimensioneTeam = dimensioneTeam; }
+
+    public Organizzatore getOrganizzatore() { return organizzatore; }
+    public void setOrganizzatore(Organizzatore organizzatore) { this.organizzatore = organizzatore; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Hackathon)) return false;
+        Hackathon h = (Hackathon) o;
+        return Objects.equals(titolo, h.titolo) && Objects.equals(sede, h.sede)
+                && Objects.equals(dataInizio, h.dataInizio);
     }
 
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
+    @Override
+    public int hashCode() {
+        return Objects.hash(titolo, sede, dataInizio);
     }
-
-    public String getSede() {
-        return sede;
-    }
-
-    public void setSede(String sede) {
-        this.sede = sede;
-    }
-
-    public LocalDateTime getData_inizio() {
-        return data_inizio;
-    }
-
-    public void setData_inizio(LocalDateTime data_inizio) {
-        this.data_inizio = data_inizio;
-    }
-
-    public LocalDateTime getData_fine() {
-        return data_fine;
-    }
-
-    public void setData_fine(LocalDateTime data_fine) {
-        this.data_fine = data_fine;
-    }
-
-    public int getMassimo_partecipanti() {
-        return massimo_partecipanti;
-    }
-
-    public void setMassimo_partecipanti(int massimo_partecipanti) {
-        this.massimo_partecipanti = massimo_partecipanti;
-    }
-
-    public int getDimensione_team() {
-        return dimensione_team;
-    }
-
-    public void setDimensione_team(int dimensione_team) {
-        this.dimensione_team = dimensione_team;
-    }
-    }
+}
