@@ -1,5 +1,4 @@
-
-// File: Controller.java
+// File: src/main/java/controller/Controller.java
 package controller;
 
 import model.*;
@@ -74,16 +73,22 @@ public class Controller implements Serializable {
 
         Utente u;
         switch (ruolo) {
-            case "Organizzatore": u = new Organizzatore(nome, cognome, null, email, password); break;
-            case "Giudice":      u = new Giudice(nome, cognome, null, email, password);      break;
-            default:               u = new Partecipante(nome, cognome, null, email, password); break;
+            case "Organizzatore":
+                u = new Organizzatore(nome, cognome, null, email, password);
+                break;
+            case "Giudice":
+                u = new Giudice(nome, cognome, null, email, password);
+                break;
+            default:
+                u = new Partecipante(nome, cognome, null, email, password);
+                break;
         }
         utenti.add(u);
         return u;
     }
 
     /**
-     * Login con email e password.
+     * Esegue login con email e password.
      */
     public Utente login(String email, String pwd) {
         Optional<Utente> opt = utenti.stream()
@@ -96,8 +101,29 @@ public class Controller implements Serializable {
         return null;
     }
 
+    /**
+     * Restituisce l'utente attualmente autenticato.
+     */
     public Utente getCurrentUser() {
         return currentUser;
+    }
+
+    /**
+     * Restituisce la lista di tutti gli Utenti registrati.
+     *
+     * @return lista immutabile di Utente
+     */
+    public List<Utente> getUtenti() {
+        return Collections.unmodifiableList(utenti);
+    }
+
+    /**
+     * Imposta l'utente corrente (bypass login).
+     *
+     * @param user Utente da impostare come currentUser
+     */
+    public void setCurrentUser(Utente user) {
+        this.currentUser = user;
     }
 
     /**
