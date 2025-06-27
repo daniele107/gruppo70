@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class Organizzatore extends Utente {
     public Organizzatore() { super(); }
-    public Organizzatore(String nome, String cognome, LocalDate data_nascita, String email, String password) {
-        super(nome, cognome, data_nascita, email, password);
+    public Organizzatore(String nome, String cognome, LocalDate dataNascita, String email, String password) {
+        super(nome, cognome, dataNascita, email, password);
     }
 
     /**

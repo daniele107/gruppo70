@@ -8,21 +8,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class Partecipante extends Utente {
-    private final List<Invito> inviti = new ArrayList<>();
+    private String nomeTeam;
 
     public Partecipante() { super(); }
 
-    public Partecipante(String nome, String cognome, LocalDate data_nascita, String email, String password) {
-        super(nome, cognome, data_nascita, email, password);
+    public Partecipante(String nome, String cognome, LocalDate dataNascita, String email, String password, String nomeTeam) {
+        super(nome, cognome, dataNascita, email, password);
+        this.nomeTeam = nomeTeam;
+    }
+    public String getNome() {
+        return nomeTeam;
+    }
+    public void setNome(String nomeTeam) {
+        this.nomeTeam = nomeTeam;
     }
 
-    /**
-     * Restituisce gli inviti in modo non modificabile.
-     */
-    public List<Invito> getInviti() { return Collections.unmodifiableList(inviti); }
-
-    /**
-     * Aggiunge un invito alla lista.
-     */
-    public void addInvito(Invito inv) { inviti.add(inv); }
 }
