@@ -1,0 +1,9 @@
+
+K
+java:S3457¡"4Lambda should be used to defer string concatenation.(—ðÊ„
+b
+java:S1612­"FReplace this lambda with method reference 'SwingWorker.this::publish'.(–¨š©ûÿÿÿÿ
+m
+java:S4276ç"QRefactor this code to use the more specialised Functional Interface 'IntConsumer'(—¼šÍûÿÿÿÿ
+<
+java:S3457·"%String contains no format specifiers.(Ô¡ÆÝ

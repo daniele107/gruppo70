@@ -1,0 +1,20 @@
+
+h	java:S112Í"FDefine and throw a dedicated exception instead of using a generic one.(Ôııæüÿÿÿÿ8¹úßö™3
+c	java:S112Ú"FDefine and throw a dedicated exception instead of using a generic one.(ƒğ†8ºúßö™3
+h	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(äŞ¡¸ıÿÿÿÿ8»úßö™3
+h	java:S112˜"FDefine and throw a dedicated exception instead of using a generic one.(®ÊĞ·şÿÿÿÿ8¼úßö™3
+c	java:S112¥"FDefine and throw a dedicated exception instead of using a generic one.(Ñ¨Ğ‰8¼úßö™3
+c	java:S112ö"FDefine and throw a dedicated exception instead of using a generic one.(åŞ’è8¼úßö™3
+X
+java:S1141È"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Èúßö™3
+
+java:S1130Í"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(Ôııæüÿÿÿÿ8Íşßö™3
+9
+java:S3626Ô"Remove this redundant jump.(ûÁİ…8ëşßö™3
+
+java:S1130˜"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(®ÊĞ·şÿÿÿÿ8ëşßö™3
+u
+java:S6204Ò"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(Ü¤÷‰úÿÿÿÿ8óçØö™3
+|
+java:S2142ä"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8óçØö™3
+K	java:S108	")Either remove or fill this block of code.(öõÈèÿÿÿÿÿ8Ö×Šâ™3
