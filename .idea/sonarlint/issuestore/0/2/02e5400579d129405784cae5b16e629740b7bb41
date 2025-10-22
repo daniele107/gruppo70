@@ -1,0 +1,23 @@
+
+a	java:S112È"FDefine and throw a dedicated exception instead of using a generic one.(‘Ç–Óùÿÿÿÿ
+a	java:S112Ó"FDefine and throw a dedicated exception instead of using a generic one.(Æò¿°øÿÿÿÿ
+R
+java:S2629P"7Use the built-in formatting to construct this argument.(ÅşËíıÿÿÿÿ
+R
+java:S2629a"7Use the built-in formatting to construct this argument.(¯ïœ–ûÿÿÿÿ
+s
+java:S2629Ì"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(•®„‹
+\
+java:S2184Ä"@Cast one of the operands of this addition operation to a "long".(ŒàÓùÿÿÿÿ
+8
+java:S3457Œ"!Single quote "'" must be escaped.(âÑ‘Ü
+u
+java:S2142£"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾
+K
+java:S3457¤"4Lambda should be used to defer string concatenation.(”öÜÊ
+u
+java:S2142·"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾
+8
+java:S3457¸"!Single quote "'" must be escaped.(Â°ç£
+E
+java:S2140Ä")Use "java.util.Random.nextInt()" instead.(ŒàÓùÿÿÿÿ

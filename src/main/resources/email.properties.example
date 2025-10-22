@@ -1,0 +1,63 @@
+# Configurazione Email SMTP - Hackathon Manager
+# Rinomina questo file in 'email.properties' e configura i tuoi parametri
+
+# Server SMTP
+smtp.host=smtp.gmail.com
+smtp.port=587
+smtp.tls=true
+smtp.auth=true
+
+# Credenziali (IMPORTANTE: Non committare mai password reali!)
+smtp.username=your-email@gmail.com
+smtp.password=your-app-password
+
+# Mittente
+from.email=your-email@gmail.com
+from.name=Hackathon Manager
+
+# ============================================
+# CONFIGURAZIONI PER DIVERSI PROVIDER:
+# ============================================
+
+# GMAIL:
+# smtp.host=smtp.gmail.com
+# smtp.port=587
+# Nota: Usa App Password, non la password normale!
+
+# OUTLOOK/HOTMAIL:
+# smtp.host=smtp-mail.outlook.com
+# smtp.port=587
+
+# YAHOO:
+# smtp.host=smtp.mail.yahoo.com
+# smtp.port=587
+
+# SERVER SMTP PERSONALIZZATO:
+# smtp.host=mail.yourdomain.com
+# smtp.port=587
+# smtp.tls=true
+# smtp.auth=true
+
+# ============================================
+# ISTRUZIONI CONFIGURAZIONE:
+# ============================================
+
+# 1. Per Gmail:
+#    - Abilita autenticazione a 2 fattori
+#    - Genera una "App Password" specifica
+#    - Usa l'App Password nel campo smtp.password
+
+# 2. Per Outlook:
+#    - Usa le tue credenziali normali
+#    - Assicurati che SMTP sia abilitato
+
+# 3. Per server personalizzati:
+#    - Contatta il tuo provider per i parametri corretti
+#    - Verifica porta e impostazioni TLS/SSL
+
+# ============================================
+# SICUREZZA:
+# ============================================
+# - Non committare MAI questo file con password reali
+# - Usa variabili d'ambiente in produzione
+# - Considera l'uso di servizi come SendGrid, Mailgun, etc.

@@ -1,0 +1,104 @@
+{
+  "rules": [
+    {
+      "key": "S2077",
+      "name": "SQL Injection",
+      "description": "SQL queries should be parameterized",
+      "severity": "BLOCKER",
+      "tags": ["security", "sql", "injection"],
+      "appliesTo": ["JAVA"],
+      "patterns": [
+        {
+          "pattern": "String sql = \".*\" \\+ .*",
+          "message": "Use parameterized queries instead of string concatenation"
+        }
+      ]
+    },
+    {
+      "key": "S2095",
+      "name": "Database resources should be closed",
+      "description": "Database resources should be closed after use",
+      "severity": "CRITICAL",
+      "tags": ["security", "database", "resource"],
+      "appliesTo": ["JAVA"],
+      "patterns": [
+        {
+          "pattern": "PreparedStatement .* = .*",
+          "message": "Ensure PreparedStatement is closed in finally block or try-with-resources"
+        },
+        {
+          "pattern": "ResultSet .* = .*",
+          "message": "Ensure ResultSet is closed in finally block or try-with-resources"
+        }
+      ]
+    },
+    {
+      "key": "S4790",
+      "name": "Jackson ObjectMapper should be configured securely",
+      "description": "ObjectMapper should disable dangerous features",
+      "severity": "MAJOR",
+      "tags": ["security", "jackson", "deserialization"],
+      "appliesTo": ["JAVA"],
+      "patterns": [
+        {
+          "pattern": "new ObjectMapper\\(\\)\\.",
+          "message": "Configure ObjectMapper securely: mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)"
+        }
+      ]
+    },
+    {
+      "key": "S4433",
+      "name": "JavaMail should use secure protocols",
+      "description": "Email connections should use secure protocols",
+      "severity": "MAJOR",
+      "tags": ["security", "email", "protocol"],
+      "appliesTo": ["JAVA"],
+      "patterns": [
+        {
+          "pattern": "mail.smtp.starttls.enable.*false",
+          "message": "Enable STARTTLS for secure email transmission"
+        },
+        {
+          "pattern": "mail.smtp.ssl.enable.*false",
+          "message": "Use SSL/TLS for secure email connections"
+        }
+      ]
+    },
+    {
+      "key": "S4792",
+      "name": "SLF4J logging should use parameterized messages",
+      "description": "Avoid string concatenation in logging statements",
+      "severity": "MINOR",
+      "tags": ["security", "logging", "performance"],
+      "appliesTo": ["JAVA"],
+      "patterns": [
+        {
+          "pattern": "logger\\..*\\(\".*\" \\+ .*\\)",
+          "message": "Use parameterized logging: logger.info(\"User {} logged in\", username)"
+        }
+      ]
+    }
+  ],
+  "libraries": [
+    {
+      "name": "PostgreSQL JDBC Driver",
+      "version": "42.7.5",
+      "vulnerabilities": []
+    },
+    {
+      "name": "Jackson Databind",
+      "version": "2.15.2",
+      "vulnerabilities": []
+    },
+    {
+      "name": "JavaMail API",
+      "version": "1.6.2",
+      "vulnerabilities": []
+    },
+    {
+      "name": "SLF4J API",
+      "version": "2.0.9",
+      "vulnerabilities": []
+    }
+  ]
+}

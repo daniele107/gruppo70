@@ -1,0 +1,11 @@
+
+w
+java:S26295"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(ëšëÊûÿÿÿÿ
+M
+java:S2629j"7Use the built-in formatting to construct this argument.(êÓß
+O
+java:S3457n"4Lambda should be used to defer string concatenation.(”«ª—ÿÿÿÿÿ
+J
+java:S3457q"4Lambda should be used to defer string concatenation.(©à¾
+o
+java:S1602"SRemove useless curly braces around statement and then remove useless return keyword(şÍ¥«ùÿÿÿÿ

@@ -1,0 +1,155 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "controller.ValidationException#ValidationException(String)",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "controller.ValidationException",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_637428636 { 
+   	label=controller
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1872830130 { 
+   	label=Controller
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Controller637428636XXXcreaTeam1958979303[
+	label="+ creaTeam()"
+	style=filled
+	fillcolor=white
+	tooltip="Controller
+
+&#10;&#10;  Crea un nuovo team&#10;&#10; &#10;&#10;  @param hackathonId l'ID dell'hackathon&#10;&#10;  @param nomeTeam il nome del team&#10;&#10;  @param dimensioneMassima la dimensione massima del team&#10;&#10;  @return l'ID del team creato o -1 se fallito&#10;&#10;  @throws IllegalArgumentException se i parametri non sono validi&#10;&#10;  @throws DataAccessException se si verifica un errore di database&#10;&#10; "
+	fontcolor=darkgreen
+];
+
+Controller637428636XXXlogin2013066710[
+	label="+ login()"
+	style=filled
+	fillcolor=white
+	tooltip="Controller
+
+&#10;&#10;  Autentica un utente nel sistema&#10;&#10; &#10;&#10;  @param loginil login dell'utente&#10;&#10;  @param password la password dell'utente&#10;&#10;  @return true se l'autenticazione è riuscita&#10;&#10;  @throws IllegalArgumentException se i parametri sono null o vuoti&#10;&#10; "
+	fontcolor=darkgreen
+];
+
+Controller637428636XXXregistraUtente1366095254[
+	label="+ registraUtente()"
+	style=filled
+	fillcolor=white
+	tooltip="Controller
+
+&#10;&#10;  Registra un nuovo utente nel sistema&#10;&#10; &#10;&#10;  @param loginil login del nuovo utente&#10;&#10;  @param password la password del nuovo utente&#10;&#10;  @param nome il nome del nuovo utente&#10;&#10;  @param cognome il cognome del nuovo utente&#10;&#10;  @param emaill'email del nuovo utente&#10;&#10;  @param ruoloil ruolo del nuovo utente&#10;&#10;  @return true se la registrazione è riuscita&#10;&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_229567076 { 
+   	label=ValidationException
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ValidationException637428636XXXValidationException1808118735[
+	label="+ ValidationException()"
+	style=filled
+	fillcolor=white
+	tooltip="ValidationException
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+} 
+
+'edges    
+Controller637428636XXXcreaTeam1958979303 -> ValidationException637428636XXXValidationException1808118735;
+Controller637428636XXXlogin2013066710 -> ValidationException637428636XXXValidationException1808118735;
+Controller637428636XXXregistraUtente1366095254 -> ValidationException637428636XXXValidationException1808118735;
+    
+}
+@enduml
