@@ -13,6 +13,7 @@ gui\RegisterPanel$2.class
 gui\RegisterPanel$13.class
 gui\RegisterPanel$20.class
 gui\LoginPanel$3.class
+database\package-info.class
 gui\RegisterPanel$5.class
 gui\DashboardGiudice$2.class
 gui\RegisterPanel$16.class

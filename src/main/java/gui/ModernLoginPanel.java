@@ -293,10 +293,20 @@ public class ModernLoginPanel extends JPanel {
             setupDialogHandlers();
         }
         private void initializeDialog() {
-            setSize(520, 780);
+            // Dimensioni più ragionevoli per la finestra di registrazione
+            setSize(450, 650);
+            
+            // Assicurati che la finestra non sia più grande dello schermo
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int maxWidth = (int) (screenSize.width * 0.9); // Massimo 90% della larghezza schermo
+            int maxHeight = (int) (screenSize.height * 0.9); // Massimo 90% dell'altezza schermo
+            
+            if (getWidth() > maxWidth) setSize(maxWidth, getHeight());
+            if (getHeight() > maxHeight) setSize(getWidth(), maxHeight);
+            
             setLocationRelativeTo(getParent());
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            setResizable(false);
+            setResizable(true); // Permetti il ridimensionamento se necessario
             // Initialize modern working fields
             nameField = new FixedTextField("Inserisci il tuo nome completo");
             emailField = new FixedTextField("Inserisci la tua email");
@@ -321,7 +331,8 @@ public class ModernLoginPanel extends JPanel {
         private void createDialogLayout() {
             setLayout(new BorderLayout());
             setBackground(DesignSystem.getBackgroundPrimary());
-            // Create main scrollable panel
+            
+            // Create main panel
             JPanel mainPanel = new JPanel();
             mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
             mainPanel.setBackground(DesignSystem.getBackgroundPrimary());
