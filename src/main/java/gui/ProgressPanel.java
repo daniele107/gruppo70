@@ -230,11 +230,19 @@ public class ProgressPanel extends JPanel {
         JButton salvaButton = new JButton("\uD83D\uDCBE Salva Commento");
         JButton annullaButton = new JButton("\u274C Annulla");
         salvaButton.setBackground(new Color(155, 89, 182));
-        salvaButton.setForeground(Color.WHITE);
+        salvaButton.setForeground(Color.BLACK);
+        salvaButton.setOpaque(true);
+        salvaButton.setBorderPainted(true);
+        salvaButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         salvaButton.setFocusPainted(false);
+        salvaButton.setFont(new Font(FONT_NAME, Font.BOLD, 14));
         annullaButton.setBackground(new Color(231, 76, 60));
-        annullaButton.setForeground(Color.WHITE);
+        annullaButton.setForeground(Color.BLACK);
+        annullaButton.setOpaque(true);
+        annullaButton.setBorderPainted(true);
+        annullaButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         annullaButton.setFocusPainted(false);
+        annullaButton.setFont(new Font(FONT_NAME, Font.BOLD, 14));
         salvaButton.addActionListener(e -> {
             String commento = commentoArea.getText().trim();
             if (commento.isEmpty()) {
@@ -307,10 +315,12 @@ public class ProgressPanel extends JPanel {
      */
     private JButton createStyledButton(String text, Color backgroundColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font(FONT_NAME, Font.BOLD, 12));
-        button.setForeground(Color.WHITE);
+        button.setFont(new Font(FONT_NAME, Font.BOLD, 14));
+        button.setForeground(Color.BLACK);
         button.setBackground(backgroundColor);
-        button.setBorder(BorderFactory.createEmptyBorder(10, 16, 10, 16));
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         // Hover effect

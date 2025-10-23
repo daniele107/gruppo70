@@ -680,10 +680,12 @@ public class DashboardPartecipante extends JPanel {
     private JButton createActionButton(String text, Color color) {
         JButton button = new JButton(text);
         button.setBackground(color);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
-        button.setBorderPainted(false);
-        button.setFont(new Font(FONT_FAMILY, Font.BOLD, 11));
+        button.setFont(new Font(FONT_FAMILY, Font.BOLD, 14));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         return button;
     }

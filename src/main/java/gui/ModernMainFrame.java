@@ -286,7 +286,7 @@ public class ModernMainFrame extends JFrame {
         ModernComponents.ModernButton button = new ModernComponents.ModernButton(text);
         button.setFont(DesignSystem.LABEL_LARGE);
         button.setBackground(backgroundColor);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
         button.setPreferredSize(new Dimension(220, 45)); // Più stretti per centrarli
         button.setMaximumSize(new Dimension(220, 45)); // Dimensione fissa
         button.setAlignmentX(Component.CENTER_ALIGNMENT); // CENTRALI

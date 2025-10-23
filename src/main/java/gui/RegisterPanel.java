@@ -494,7 +494,7 @@ public class RegisterPanel extends JPanel {
                 g2d.setColor(getBackground());
                 g2d.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), 8, 8));
                 // Disegna testo
-                g2d.setColor(getForeground());
+                g2d.setColor(Color.BLACK); // Forza testo nero per visibilità
                 g2d.setFont(getFont());
                 FontMetrics fm = g2d.getFontMetrics();
                 int x = (getWidth() - fm.stringWidth(getText())) / 2;
@@ -504,9 +504,11 @@ public class RegisterPanel extends JPanel {
             }
         };
         button.setFont(new Font(MODERN_FONT, Font.BOLD, 14));
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
         button.setBackground(backgroundColor);
-        button.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         // Hover effects
@@ -539,7 +541,7 @@ public class RegisterPanel extends JPanel {
                 g2d.setColor(getBackground());
                 g2d.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), 8, 8));
                 // Disegna testo
-                g2d.setColor(getForeground());
+                g2d.setColor(Color.BLACK); // Forza testo nero per visibilità
                 g2d.setFont(getFont());
                 FontMetrics fm = g2d.getFontMetrics();
                 int x = (getWidth() - fm.stringWidth(getText())) / 2;
@@ -549,9 +551,11 @@ public class RegisterPanel extends JPanel {
             }
         };
         button.setFont(new Font(MODERN_FONT, Font.BOLD, 14));
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
         button.setBackground(backgroundColor);
-        button.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.addActionListener(action);

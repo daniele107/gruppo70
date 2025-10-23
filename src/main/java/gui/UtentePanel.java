@@ -44,20 +44,22 @@ public class UtentePanel extends JPanel {
         modificaProfiloButton = new JButton("Modifica Profilo");
         cambiaPasswordButton = new JButton(CAMBIA_PASSWORD_TEXT);
         
-        // Style buttons
-        modificaProfiloButton.setBackground(new Color(52, 152, 219)); // Blu
-        modificaProfiloButton.setForeground(Color.BLACK); // Testo nero per visibilità
+        // Style buttons - usa colori contrastanti
+        modificaProfiloButton.setBackground(new Color(70, 130, 180)); // Blu scuro
+        modificaProfiloButton.setForeground(Color.BLACK); // Bianco su blu scuro
         modificaProfiloButton.setFocusPainted(false);
-        modificaProfiloButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        modificaProfiloButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         modificaProfiloButton.setOpaque(true);
-        modificaProfiloButton.setBorderPainted(false);
+        modificaProfiloButton.setBorderPainted(true);
+        modificaProfiloButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
-        cambiaPasswordButton.setBackground(new Color(46, 204, 113)); // Verde
-        cambiaPasswordButton.setForeground(Color.BLACK); // Testo nero per visibilità
+        cambiaPasswordButton.setBackground(new Color(34, 139, 34)); // Verde scuro
+        cambiaPasswordButton.setForeground(Color.BLACK); // Bianco su verde scuro
         cambiaPasswordButton.setFocusPainted(false);
-        cambiaPasswordButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        cambiaPasswordButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         cambiaPasswordButton.setOpaque(true);
-        cambiaPasswordButton.setBorderPainted(false);
+        cambiaPasswordButton.setBorderPainted(true);
+        cambiaPasswordButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
     }
     /**
      * Configura il layout del pannello
@@ -153,20 +155,22 @@ public class UtentePanel extends JPanel {
         JButton confirmButton = new JButton("Salva");
         JButton cancelButton = new JButton("Annulla");
         
-        // Style buttons
-        confirmButton.setBackground(new Color(52, 152, 219)); // Blu
-        confirmButton.setForeground(Color.BLACK); // Testo nero per visibilità
+        // Style buttons - usa colori contrastanti
+        confirmButton.setBackground(new Color(70, 130, 180)); // Blu scuro
+        confirmButton.setForeground(Color.BLACK); // Bianco su blu scuro
         confirmButton.setFocusPainted(false);
-        confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         confirmButton.setOpaque(true);
-        confirmButton.setBorderPainted(false);
+        confirmButton.setBorderPainted(true);
+        confirmButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
-        cancelButton.setBackground(new Color(231, 76, 60)); // Rosso
-        cancelButton.setForeground(Color.BLACK); // Testo nero per visibilità
+        cancelButton.setBackground(new Color(178, 34, 34)); // Rosso scuro
+        cancelButton.setForeground(Color.BLACK); // Bianco su rosso scuro
         cancelButton.setFocusPainted(false);
-        cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         cancelButton.setOpaque(true);
-        cancelButton.setBorderPainted(false);
+        cancelButton.setBorderPainted(true);
+        cancelButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
         confirmButton.addActionListener(e -> {
             String nome = nomeField.getText().trim();
@@ -180,10 +184,21 @@ public class UtentePanel extends JPanel {
                 mainFrame.showError("Inserisci un'email valida");
                 return;
             }
-            // Implementazione placeholder per aggiornamento utente
-            mainFrame.showInfo("Profilo aggiornato con successo!");
-            dialog.dispose();
-            refreshData();
+            // Aggiornamento profilo reale
+            try {
+                boolean success = controller.aggiornaProfilo(nome, cognome, email);
+                if (success) {
+                    mainFrame.showInfo("Profilo aggiornato con successo!");
+                    dialog.dispose();
+                    refreshData();
+                } else {
+                    mainFrame.showError("Errore durante l'aggiornamento del profilo");
+                }
+            } catch (IllegalArgumentException ex) {
+                mainFrame.showError("❌ " + ex.getMessage());
+            } catch (Exception ex) {
+                mainFrame.showError("❌ Errore durante l'aggiornamento: " + ex.getMessage());
+            }
         });
         cancelButton.addActionListener(e -> dialog.dispose());
         buttonPanel.add(confirmButton);
@@ -226,20 +241,22 @@ public class UtentePanel extends JPanel {
         JButton confirmButton = new JButton(CAMBIA_PASSWORD_TEXT);
         JButton cancelButton = new JButton("Annulla");
         
-        // Style buttons
-        confirmButton.setBackground(new Color(52, 152, 219)); // Blu
-        confirmButton.setForeground(Color.BLACK); // Testo nero per visibilità
+        // Style buttons - usa colori contrastanti
+        confirmButton.setBackground(new Color(70, 130, 180)); // Blu scuro
+        confirmButton.setForeground(Color.BLACK); // Bianco su blu scuro
         confirmButton.setFocusPainted(false);
-        confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         confirmButton.setOpaque(true);
-        confirmButton.setBorderPainted(false);
+        confirmButton.setBorderPainted(true);
+        confirmButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
-        cancelButton.setBackground(new Color(231, 76, 60)); // Rosso
-        cancelButton.setForeground(Color.BLACK); // Testo nero per visibilità
+        cancelButton.setBackground(new Color(178, 34, 34)); // Rosso scuro
+        cancelButton.setForeground(Color.BLACK); // Bianco su rosso scuro
         cancelButton.setFocusPainted(false);
-        cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         cancelButton.setOpaque(true);
-        cancelButton.setBorderPainted(false);
+        cancelButton.setBorderPainted(true);
+        cancelButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
         confirmButton.addActionListener(e -> {
             String vecchiaPassword = new String(vecchiaPasswordField.getPassword());

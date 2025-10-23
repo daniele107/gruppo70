@@ -451,13 +451,13 @@ INSERT INTO notifications (utente_id, titolo, messaggio, tipo, letta) VALUES
 
 -- Documento di esempio
 INSERT INTO documents (team_id, hackathon_id, nome, percorso, tipo, dimensione, utente_caricamento, descrizione) VALUES
-(1, 1, 'Progetto_Alpha_v1.pdf', '/uploads/team1/Progetto_Alpha_v1.pdf', 'application/pdf', 2048576, 4, 'Prima versione del progetto del team Alpha');
+(1, 1, 'Progetto_Alpha_v1.txt', '/uploads/team1/Progetto_Alpha_v1.txt', 'text/plain', 1024, 4, 'Prima versione del progetto del team Alpha - Documento di esempio per demo');
 
 -- Audit log di esempio
 INSERT INTO audit_log (utente_id, azione, risorsa, risorsa_id, dettagli, risultato) VALUES
 (1, 'LOGIN', 'USER', 1, 'Admin login successful', 'SUCCESS'),
 (4, 'CREATE_TEAM', 'TEAM', 1, 'Team Alpha created for Hackathon 2025', 'SUCCESS'),
-(4, 'UPLOAD_DOCUMENT', 'DOCUMENT', 1, 'Uploaded Progetto_Alpha_v1.pdf (2MB)', 'SUCCESS');
+(4, 'UPLOAD_DOCUMENT', 'DOCUMENT', 1, 'Uploaded Progetto_Alpha_v1.txt (1KB)', 'SUCCESS');
 
 -- =====================================================
 -- CONFERMA COMPLETAMENTO

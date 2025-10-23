@@ -92,10 +92,12 @@ public class EventiPanel extends JPanel {
      */
     private JButton createStyledButtonWithTextColor(String text, Color backgroundColor, Color textColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font(FONT_FAMILY, Font.BOLD, 12));
-        button.setForeground(textColor);
+        button.setFont(new Font(FONT_FAMILY, Font.BOLD, 14));
+        button.setForeground(Color.BLACK); // Forza testo nero per visibilità
         button.setBackground(backgroundColor);
-        button.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setPreferredSize(new Dimension(200, 40));
@@ -117,10 +119,12 @@ public class EventiPanel extends JPanel {
      */
     private JButton createStyledButton(String text, Color backgroundColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font(FONT_FAMILY, Font.BOLD, 12));
-        button.setForeground(Color.WHITE);
+        button.setFont(new Font(FONT_FAMILY, Font.BOLD, 14));
+        button.setForeground(Color.BLACK);
         button.setBackground(backgroundColor);
-        button.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setPreferredSize(new Dimension(200, 40));
@@ -426,16 +430,28 @@ public class EventiPanel extends JPanel {
             // Ripristina colori originali
             if (button == apriRegistrazioniButton) {
                 button.setBackground(INFO_COLOR);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+                button.setOpaque(true);
+                button.setBorderPainted(true);
+                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
             } else if (button == chiudiRegistrazioniButton) {
                 button.setBackground(WARNING_COLOR);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+                button.setOpaque(true);
+                button.setBorderPainted(true);
+                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
             } else if (button == avviaEventoButton) {
                 button.setBackground(SUCCESS_COLOR);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+                button.setOpaque(true);
+                button.setBorderPainted(true);
+                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
             } else if (button == concludeEventoButton) {
                 button.setBackground(ERROR_COLOR);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+                button.setOpaque(true);
+                button.setBorderPainted(true);
+                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
             }
         }
         button.repaint();
@@ -880,17 +896,21 @@ public class EventiPanel extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         buttonPanel.setBackground(Color.WHITE);
         JButton avviaButton = new JButton("🚀 Avvia Hackathon");
-        avviaButton.setFont(new Font(FONT_FAMILY, Font.BOLD, 12));
+        avviaButton.setFont(new Font(FONT_FAMILY, Font.BOLD, 14));
         avviaButton.setBackground(SUCCESS_COLOR);
-        avviaButton.setForeground(Color.WHITE);
-        avviaButton.setBorder(BorderFactory.createEmptyBorder(6, 16, 6, 16));
+        avviaButton.setForeground(Color.BLACK);
+        avviaButton.setOpaque(true);
+        avviaButton.setBorderPainted(true);
+        avviaButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         avviaButton.setFocusPainted(false);
         avviaButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         JButton cancelButton = new JButton("Annulla");
-        cancelButton.setFont(new Font(FONT_FAMILY, Font.BOLD, 12));
+        cancelButton.setFont(new Font(FONT_FAMILY, Font.BOLD, 14));
         cancelButton.setBackground(ERROR_COLOR);
-        cancelButton.setForeground(Color.WHITE);
-        cancelButton.setBorder(BorderFactory.createEmptyBorder(6, 16, 6, 16));
+        cancelButton.setForeground(Color.BLACK);
+        cancelButton.setOpaque(true);
+        cancelButton.setBorderPainted(true);
+        cancelButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         cancelButton.setFocusPainted(false);
         cancelButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         avviaButton.addActionListener(e -> {

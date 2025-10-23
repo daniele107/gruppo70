@@ -633,39 +633,169 @@ public class FileViewerDialog extends JDialog {
      */
     private void handlePreview() {
         if (selectedDocument == null || !isPreviewable(selectedDocument)) return;
-        
+
         try {
-            // Per ora mostra informazioni dettagliate
-            // In un'implementazione reale, aprirebbe il file con l'applicazione predefinita
             JDialog previewDialog = new JDialog(this, "👁️ Anteprima - " + selectedDocument.getNome(), true);
-            previewDialog.setSize(600, 400);
+            previewDialog.setSize(800, 600);
             previewDialog.setLocationRelativeTo(this);
-            
-            JTextArea previewArea = new JTextArea();
-            previewArea.setEditable(false);
-            previewArea.setFont(new Font("Consolas", Font.PLAIN, 12));
-            
-            StringBuilder preview = new StringBuilder();
-            preview.append("📄 ANTEPRIMA DOCUMENTO\n");
-            preview.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
-            preview.append(NOME_COLUMN).append(" file: ").append(selectedDocument.getNome()).append("\n");
-            preview.append("Tipo MIME: ").append(selectedDocument.getTipo()).append("\n");
-            preview.append(DIMENSIONE_COLUMN).append(": ").append(formatFileSize(selectedDocument.getDimensione())).append("\n");
-            preview.append("Percorso: ").append(selectedDocument.getPercorso()).append("\n\n");
-            
+
+            // Crea panel principale per l'anteprima
+            JPanel mainPanel = new JPanel(new BorderLayout());
+
+            // Header con informazioni file
+            JPanel headerPanel = new JPanel(new GridBagLayout());
+            headerPanel.setBorder(BorderFactory.createTitledBorder("📄 Informazioni File"));
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.insets = new Insets(5, 5, 5, 5);
+            gbc.anchor = GridBagConstraints.WEST;
+
+            gbc.gridx = 0; gbc.gridy = 0;
+            headerPanel.add(new JLabel("Nome:"), gbc);
+            gbc.gridx = 1;
+            headerPanel.add(new JLabel(selectedDocument.getNome()), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 1;
+            headerPanel.add(new JLabel("Tipo:"), gbc);
+            gbc.gridx = 1;
+            headerPanel.add(new JLabel(selectedDocument.getTipo()), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 2;
+            headerPanel.add(new JLabel("Dimensione:"), gbc);
+            gbc.gridx = 1;
+            headerPanel.add(new JLabel(formatFileSize(selectedDocument.getDimensione())), gbc);
+
             if (selectedDocument.getDescrizione() != null && !selectedDocument.getDescrizione().trim().isEmpty()) {
-                preview.append("Descrizione:\n").append(selectedDocument.getDescrizione()).append("\n\n");
+                gbc.gridx = 0; gbc.gridy = 3;
+                headerPanel.add(new JLabel("Descrizione:"), gbc);
+                gbc.gridx = 1;
+                headerPanel.add(new JLabel(selectedDocument.getDescrizione()), gbc);
             }
-            
-            preview.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
-            preview.append("NOTA: In un'implementazione completa, qui verrebbe mostrata l'anteprima del contenuto\n");
-            preview.append("del file (testo per i file di testo, miniatura per le immagini, etc.)");
-            
-            previewArea.setText(preview.toString());
-            
-            previewDialog.add(new JScrollPane(previewArea));
+
+            mainPanel.add(headerPanel, BorderLayout.NORTH);
+
+            // Panel per il contenuto/anteprima
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createTitledBorder("📋 Contenuto"));
+
+            // Determina il tipo di anteprima da mostrare
+            String mimeType = selectedDocument.getTipo().toLowerCase();
+
+            if (mimeType.contains("text") || mimeType.contains("plain") || selectedDocument.getNome().toLowerCase().endsWith(".txt")) {
+                // File di testo - mostra contenuto
+                JTextArea textArea = new JTextArea();
+                textArea.setEditable(false);
+                textArea.setFont(new Font("Consolas", Font.PLAIN, 12));
+                textArea.setBackground(Color.WHITE);
+
+                try {
+                    // Prova a leggere il contenuto del file dal database
+                    Documento fullDoc = controller.getDocumentoById(selectedDocument.getId());
+                    if (fullDoc != null && fullDoc.getContenuto() != null) {
+                        String content = new String(fullDoc.getContenuto());
+                        textArea.setText(content);
+                        textArea.setCaretPosition(0); // Scorri all'inizio
+                    } else {
+                        textArea.setText("📝 Contenuto del file non disponibile nel database.\n\nIl file è stato caricato ma il contenuto non è accessibile.");
+                    }
+                } catch (Exception ex) {
+                    textArea.setText("❌ Errore nella lettura del contenuto:\n" + ex.getMessage());
+                }
+
+                contentPanel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+            } else if (mimeType.contains("pdf") || selectedDocument.getNome().toLowerCase().endsWith(".pdf")) {
+                // PDF - mostra anteprima testuale
+                JTextArea textArea = new JTextArea();
+                textArea.setEditable(false);
+                textArea.setFont(new Font("Consolas", Font.PLAIN, 12));
+                textArea.setBackground(new Color(250, 250, 250));
+
+                StringBuilder pdfPreview = new StringBuilder();
+                pdfPreview.append("📄 ANTEPRIMA PDF\n");
+                pdfPreview.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
+                pdfPreview.append("Nome file: ").append(selectedDocument.getNome()).append("\n");
+                pdfPreview.append("Dimensione: ").append(formatFileSize(selectedDocument.getDimensione())).append("\n\n");
+                pdfPreview.append("📋 DESCRIZIONE DEL PROGETTO:\n");
+                pdfPreview.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
+
+                // Prova a leggere il contenuto se disponibile
+                try {
+                    Documento fullDoc = controller.getDocumentoById(selectedDocument.getId());
+                    if (fullDoc != null && fullDoc.getContenuto() != null) {
+                        // Per PDF, potremmo estrarre testo se è un PDF testuale
+                        String content = new String(fullDoc.getContenuto());
+                        pdfPreview.append("Contenuto estratto:\n").append(content);
+                    } else {
+                        pdfPreview.append("📄 Questo è un documento PDF.\n\n");
+                        pdfPreview.append("Per visualizzare il contenuto completo, scarica il file utilizzando il pulsante 'Scarica File'.\n\n");
+                        pdfPreview.append("💡 Suggerimento: I PDF possono contenere testo, immagini e formattazione complessa.");
+                    }
+                } catch (Exception ex) {
+                    pdfPreview.append("❌ Errore nella lettura del PDF:\n").append(ex.getMessage());
+                }
+
+                textArea.setText(pdfPreview.toString());
+                textArea.setCaretPosition(0);
+                contentPanel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+            } else if (mimeType.startsWith("image/") || selectedDocument.getNome().toLowerCase().matches(".*\\.(jpg|jpeg|png|gif|bmp)$")) {
+                // Immagine - mostra informazioni e suggerimento
+                JTextArea textArea = new JTextArea();
+                textArea.setEditable(false);
+                textArea.setFont(new Font("Consolas", Font.PLAIN, 12));
+                textArea.setBackground(new Color(250, 250, 250));
+
+                StringBuilder imagePreview = new StringBuilder();
+                imagePreview.append("🖼️ ANTEPRIMA IMMAGINE\n");
+                imagePreview.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
+                imagePreview.append("Nome file: ").append(selectedDocument.getNome()).append("\n");
+                imagePreview.append("Tipo: ").append(selectedDocument.getTipo()).append("\n");
+                imagePreview.append("Dimensione: ").append(formatFileSize(selectedDocument.getDimensione())).append("\n\n");
+                imagePreview.append("📸 Questa è un'immagine.\n\n");
+                imagePreview.append("💡 Suggerimento: Per visualizzare l'immagine, scarica il file utilizzando il pulsante 'Scarica File'.\n");
+                imagePreview.append("L'immagine verrà aperta con l'applicazione predefinita del tuo sistema.");
+
+                textArea.setText(imagePreview.toString());
+                textArea.setCaretPosition(0);
+                contentPanel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+            } else {
+                // Altri tipi di file - mostra informazioni generiche
+                JTextArea textArea = new JTextArea();
+                textArea.setEditable(false);
+                textArea.setFont(new Font("Consolas", Font.PLAIN, 12));
+                textArea.setBackground(new Color(250, 250, 250));
+
+                StringBuilder genericPreview = new StringBuilder();
+                genericPreview.append("📄 ANTEPRIMA FILE\n");
+                genericPreview.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
+                genericPreview.append("Nome file: ").append(selectedDocument.getNome()).append("\n");
+                genericPreview.append("Tipo MIME: ").append(selectedDocument.getTipo()).append("\n");
+                genericPreview.append("Dimensione: ").append(formatFileSize(selectedDocument.getDimensione())).append("\n\n");
+                genericPreview.append("📋 Questo è un file di tipo: ").append(selectedDocument.getTipo()).append("\n\n");
+                genericPreview.append("💡 Per visualizzare il contenuto completo, scarica il file utilizzando il pulsante 'Scarica File'.");
+
+                textArea.setText(genericPreview.toString());
+                textArea.setCaretPosition(0);
+                contentPanel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+            }
+
+            mainPanel.add(contentPanel, BorderLayout.CENTER);
+
+            // Pulsante chiudi
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+            JButton closeButton = new JButton("❌ Chiudi");
+            closeButton.setBackground(new Color(231, 76, 60));
+            closeButton.setForeground(Color.BLACK);
+            closeButton.setFocusPainted(false);
+            closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+            closeButton.addActionListener(e -> previewDialog.dispose());
+            buttonPanel.add(closeButton);
+
+            mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+            previewDialog.add(mainPanel);
             previewDialog.setVisible(true);
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
                 "Errore nell'apertura dell'anteprima:\n" + ex.getMessage(),
@@ -788,10 +918,12 @@ public class FileViewerDialog extends JDialog {
     private JButton createStyledButton(String text, Color color) {
         JButton button = new JButton(text);
         button.setBackground(color);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
-        button.setBorderPainted(false);
-        button.setFont(new Font(SEGOE_UI_FONT, Font.BOLD, 12));
+        button.setFont(new Font(SEGOE_UI_FONT, Font.BOLD, 14));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         return button;
     }

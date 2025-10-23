@@ -120,36 +120,40 @@ public class TeamPanel extends JPanel {
         gestisciTeamButton = new JButton("Gestisci Team");
         richiesteJoinButton = new JButton("Richieste di Join");
         
-        // Style buttons
-        creaTeamButton.setBackground(new Color(46, 204, 113)); // Verde
-        creaTeamButton.setForeground(Color.BLACK);
+        // Style buttons - colori scuri con testo bianco
+        creaTeamButton.setBackground(new Color(34, 139, 34)); // Verde scuro
+        creaTeamButton.setForeground(Color.BLACK); // Bianco
         creaTeamButton.setFocusPainted(false);
-        creaTeamButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        creaTeamButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         creaTeamButton.setOpaque(true);
-        creaTeamButton.setBorderPainted(false);
+        creaTeamButton.setBorderPainted(true);
+        creaTeamButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
-        gestisciTeamButton.setBackground(new Color(52, 152, 219)); // Blu
-        gestisciTeamButton.setForeground(Color.BLACK);
+        gestisciTeamButton.setBackground(new Color(70, 130, 180)); // Blu scuro
+        gestisciTeamButton.setForeground(Color.BLACK); // Bianco
         gestisciTeamButton.setFocusPainted(false);
-        gestisciTeamButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        gestisciTeamButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         gestisciTeamButton.setOpaque(true);
-        gestisciTeamButton.setBorderPainted(false);
+        gestisciTeamButton.setBorderPainted(true);
+        gestisciTeamButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
-        richiesteJoinButton.setBackground(new Color(155, 89, 182)); // Viola
-        richiesteJoinButton.setForeground(Color.BLACK);
+        richiesteJoinButton.setBackground(new Color(75, 0, 130)); // Viola scuro
+        richiesteJoinButton.setForeground(Color.BLACK); // Bianco
         richiesteJoinButton.setFocusPainted(false);
-        richiesteJoinButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        richiesteJoinButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         richiesteJoinButton.setOpaque(true);
-        richiesteJoinButton.setBorderPainted(false);
+        richiesteJoinButton.setBorderPainted(true);
+        richiesteJoinButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
         // Debug button (temporaneo)
         debugButton = new JButton("🔍 Debug");
-        debugButton.setBackground(new Color(241, 196, 15)); // Giallo
-        debugButton.setForeground(Color.BLACK);
+        debugButton.setBackground(new Color(184, 134, 11)); // Giallo scuro
+        debugButton.setForeground(Color.BLACK); // Bianco
         debugButton.setFocusPainted(false);
-        debugButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        debugButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         debugButton.setOpaque(true);
-        debugButton.setBorderPainted(false);
+        debugButton.setBorderPainted(true);
+        debugButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         debugButton.addActionListener(e -> {
             controller.debugHackathonDisponibili();
             JOptionPane.showMessageDialog(this, "Controlla la console per i dettagli di debug", "Debug Info", JOptionPane.INFORMATION_MESSAGE);
@@ -157,12 +161,13 @@ public class TeamPanel extends JPanel {
         
         // Refresh button
         refreshButton = new JButton(AGGIORNA_BTN);
-        refreshButton.setBackground(new Color(52, 152, 219)); // Blu
-        refreshButton.setForeground(Color.BLACK);
+        refreshButton.setBackground(new Color(70, 130, 180)); // Blu scuro
+        refreshButton.setForeground(Color.BLACK); // Bianco
         refreshButton.setFocusPainted(false);
-        refreshButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        refreshButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         refreshButton.setOpaque(true);
-        refreshButton.setBorderPainted(false);
+        refreshButton.setBorderPainted(true);
+        refreshButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         refreshButton.addActionListener(e -> {
             refreshData();
             JOptionPane.showMessageDialog(this, "Dati aggiornati con successo!", "Aggiornamento Completato", JOptionPane.INFORMATION_MESSAGE);
@@ -334,17 +339,21 @@ public class TeamPanel extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         JButton confirmButton = new JButton(CREA_BTN);
         JButton cancelButton = new JButton(ANNULLA_BTN);
-        // Styling buttons
-        confirmButton.setBackground(new Color(46, 204, 113));
-        confirmButton.setForeground(Color.BLACK);
+        // Styling buttons - colori scuri con testo bianco
+        confirmButton.setBackground(new Color(34, 139, 34)); // Verde scuro
+        confirmButton.setForeground(Color.BLACK); // Bianco
         confirmButton.setFocusPainted(false);
+        confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         confirmButton.setOpaque(true);
-        confirmButton.setBorderPainted(false);
-        cancelButton.setBackground(new Color(231, 76, 60));
-        cancelButton.setForeground(Color.BLACK);
+        confirmButton.setBorderPainted(true);
+        confirmButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
+        cancelButton.setBackground(new Color(178, 34, 34)); // Rosso scuro
+        cancelButton.setForeground(Color.BLACK); // Bianco
         cancelButton.setFocusPainted(false);
+        cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         cancelButton.setOpaque(true);
-        cancelButton.setBorderPainted(false);
+        cancelButton.setBorderPainted(true);
+        cancelButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         confirmButton.addActionListener(e -> {
             String selectedHackathon = (String) hackathonComboBox.getSelectedItem();
             String nomeTeam = nomeTeamField.getText().trim();
@@ -597,8 +606,10 @@ public class TeamPanel extends JPanel {
         // Invite button - Green theme
         inviteButton.setFont(buttonFont);
         inviteButton.setBackground(new Color(46, 204, 113));
-        inviteButton.setForeground(Color.WHITE);
+        inviteButton.setForeground(Color.BLACK);
         inviteButton.setFocusPainted(false);
+        inviteButton.setOpaque(true);
+        inviteButton.setBorderPainted(true);
         inviteButton.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(34, 153, 84), 2),
             BorderFactory.createEmptyBorder(10, 20, 10, 20)
@@ -609,8 +620,10 @@ public class TeamPanel extends JPanel {
         // Remove button - Red theme
         removeButton.setFont(buttonFont);
         removeButton.setBackground(new Color(231, 76, 60));
-        removeButton.setForeground(Color.WHITE);
+        removeButton.setForeground(Color.BLACK);
         removeButton.setFocusPainted(false);
+        removeButton.setOpaque(true);
+        removeButton.setBorderPainted(true);
         removeButton.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(192, 57, 43), 2),
             BorderFactory.createEmptyBorder(10, 20, 10, 20)
@@ -621,8 +634,10 @@ public class TeamPanel extends JPanel {
         // Leave button - Purple theme
         leaveButton.setFont(buttonFont);
         leaveButton.setBackground(new Color(155, 89, 182));
-        leaveButton.setForeground(Color.WHITE);
+        leaveButton.setForeground(Color.BLACK);
         leaveButton.setFocusPainted(false);
+        leaveButton.setOpaque(true);
+        leaveButton.setBorderPainted(true);
         leaveButton.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(142, 68, 173), 2),
             BorderFactory.createEmptyBorder(10, 20, 10, 20)
@@ -680,12 +695,13 @@ public class TeamPanel extends JPanel {
         // Close button
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton closeButton = new JButton("Chiudi");
-        closeButton.setBackground(new Color(149, 165, 166)); // Grigio
-        closeButton.setForeground(Color.BLACK);
+        closeButton.setBackground(new Color(105, 105, 105)); // Grigio scuro
+        closeButton.setForeground(Color.BLACK); // Bianco
         closeButton.setFocusPainted(false);
-        closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        closeButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         closeButton.setOpaque(true);
-        closeButton.setBorderPainted(false);
+        closeButton.setBorderPainted(true);
+        closeButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         closeButton.addActionListener(e -> dialog.dispose());
         buttonPanel.add(closeButton);
         // Add all panels to dialog
@@ -788,8 +804,10 @@ public class TeamPanel extends JPanel {
         Dimension dialogButtonSize = new Dimension(120, 35);
         refreshUsersButton.setFont(dialogButtonFont);
         refreshUsersButton.setBackground(new Color(52, 152, 219));
-        refreshUsersButton.setForeground(Color.WHITE);
+        refreshUsersButton.setForeground(Color.BLACK);
         refreshUsersButton.setFocusPainted(false);
+        refreshUsersButton.setOpaque(true);
+        refreshUsersButton.setBorderPainted(true);
         refreshUsersButton.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(41, 128, 185), 2),
             BorderFactory.createEmptyBorder(6, 12, 6, 12)
@@ -798,8 +816,10 @@ public class TeamPanel extends JPanel {
         refreshUsersButton.setMinimumSize(dialogButtonSize);
         inviteButton.setFont(dialogButtonFont);
         inviteButton.setBackground(new Color(46, 204, 113));
-        inviteButton.setForeground(Color.WHITE);
+        inviteButton.setForeground(Color.BLACK);
         inviteButton.setFocusPainted(false);
+        inviteButton.setOpaque(true);
+        inviteButton.setBorderPainted(true);
         inviteButton.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(34, 153, 84), 2),
             BorderFactory.createEmptyBorder(6, 12, 6, 12)
@@ -808,8 +828,10 @@ public class TeamPanel extends JPanel {
         inviteButton.setMinimumSize(dialogButtonSize);
         cancelButton.setFont(dialogButtonFont);
         cancelButton.setBackground(new Color(231, 76, 60));
-        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setForeground(Color.BLACK);
         cancelButton.setFocusPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.setBorderPainted(true);
         cancelButton.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(192, 57, 43), 2),
             BorderFactory.createEmptyBorder(6, 12, 6, 12)
@@ -980,8 +1002,10 @@ public class TeamPanel extends JPanel {
         Dimension dialogButtonSize = new Dimension(140, 40);
         removeButton.setFont(dialogButtonFont);
         removeButton.setBackground(new Color(231, 76, 60));
-        removeButton.setForeground(Color.WHITE);
+        removeButton.setForeground(Color.BLACK);
         removeButton.setFocusPainted(false);
+        removeButton.setOpaque(true);
+        removeButton.setBorderPainted(true);
         removeButton.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(192, 57, 43), 2),
             BorderFactory.createEmptyBorder(8, 15, 8, 15)
@@ -990,8 +1014,10 @@ public class TeamPanel extends JPanel {
         removeButton.setMinimumSize(dialogButtonSize);
         cancelButton.setFont(dialogButtonFont);
         cancelButton.setBackground(new Color(149, 165, 166));
-        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setForeground(Color.BLACK);
         cancelButton.setFocusPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.setBorderPainted(true);
         cancelButton.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(127, 140, 141), 2),
             BorderFactory.createEmptyBorder(8, 15, 8, 15)
@@ -1181,23 +1207,35 @@ public class TeamPanel extends JPanel {
         Dimension buttonSize = new Dimension(120, 35);
         accettaButton.setFont(buttonFont);
         accettaButton.setBackground(new Color(46, 204, 113));
-        accettaButton.setForeground(Color.WHITE);
+        accettaButton.setForeground(Color.BLACK);
         accettaButton.setFocusPainted(false);
+        accettaButton.setOpaque(true);
+        accettaButton.setBorderPainted(true);
+        accettaButton.setBorder(BorderFactory.createLineBorder(new Color(34, 153, 84), 2));
         accettaButton.setPreferredSize(buttonSize);
         rifiutaButton.setFont(buttonFont);
         rifiutaButton.setBackground(new Color(231, 76, 60));
-        rifiutaButton.setForeground(Color.WHITE);
+        rifiutaButton.setForeground(Color.BLACK);
         rifiutaButton.setFocusPainted(false);
+        rifiutaButton.setOpaque(true);
+        rifiutaButton.setBorderPainted(true);
+        rifiutaButton.setBorder(BorderFactory.createLineBorder(new Color(192, 57, 43), 2));
         rifiutaButton.setPreferredSize(buttonSize);
         aggiornaButton.setFont(buttonFont);
         aggiornaButton.setBackground(new Color(52, 152, 219));
-        aggiornaButton.setForeground(Color.WHITE);
+        aggiornaButton.setForeground(Color.BLACK);
         aggiornaButton.setFocusPainted(false);
+        aggiornaButton.setOpaque(true);
+        aggiornaButton.setBorderPainted(true);
+        aggiornaButton.setBorder(BorderFactory.createLineBorder(new Color(41, 128, 185), 2));
         aggiornaButton.setPreferredSize(buttonSize);
         chiudiButton.setFont(buttonFont);
         chiudiButton.setBackground(new Color(149, 165, 166));
-        chiudiButton.setForeground(Color.WHITE);
+        chiudiButton.setForeground(Color.BLACK);
         chiudiButton.setFocusPainted(false);
+        chiudiButton.setOpaque(true);
+        chiudiButton.setBorderPainted(true);
+        chiudiButton.setBorder(BorderFactory.createLineBorder(new Color(127, 140, 141), 2));
         chiudiButton.setPreferredSize(buttonSize);
         // Hover effects
         addHoverEffect(accettaButton, new Color(34, 153, 84), new Color(46, 204, 113));

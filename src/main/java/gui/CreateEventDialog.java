@@ -110,7 +110,7 @@ public final class CreateEventDialog extends JDialog {
         // Titolo principale - NESSUN RETTANGOLO EXTRA
         JLabel titleLabel = new JLabel("➕ Crea Nuovo Evento");
         titleLabel.setFont(new Font(FONT_SEGOE_UI, Font.BOLD, 18));
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(Color.BLACK);
         titleLabel.setHorizontalAlignment(SwingConstants.LEFT);
         panel.add(titleLabel, BorderLayout.CENTER);
         return panel;
@@ -385,13 +385,13 @@ public final class CreateEventDialog extends JDialog {
         JButton button = new JButton(text);
         button.setFont(new Font(FONT_SEGOE_UI, Font.BOLD, 14));
         button.setBackground(backgroundColor);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
         button.setPreferredSize(new Dimension(150, 40));
-        button.setBorder(new EmptyBorder(8, 15, 8, 15));
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         // Rimuove elementi visivi superflui
         button.setFocusPainted(false);
-        button.setBorderPainted(false);
-        button.setOpaque(true);
         return button;
     }
     /**

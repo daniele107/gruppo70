@@ -617,10 +617,11 @@ public class MainFrame extends JFrame {
         messageLabel.setForeground(Color.WHITE);
         JButton closeButton = new JButton("×");
         closeButton.setFont(new Font(FONT_UI, Font.BOLD, 16));
-        closeButton.setForeground(Color.WHITE);
+        closeButton.setForeground(Color.BLACK); // Testo nero per visibilità
         closeButton.setBackground(new Color(0, 0, 0, 0));
         closeButton.setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 0));
         closeButton.setFocusPainted(false);
+        closeButton.setOpaque(false);
         closeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         toastPanel.add(messageLabel, BorderLayout.CENTER);
         toastPanel.add(closeButton, BorderLayout.EAST);

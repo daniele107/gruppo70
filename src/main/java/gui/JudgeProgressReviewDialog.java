@@ -173,9 +173,12 @@ public class JudgeProgressReviewDialog extends JDialog {
     private JButton createButton(String text, Color backgroundColor) {
         JButton button = new JButton(text);
         button.setBackground(backgroundColor);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
-        button.setFont(new Font(FONT_SEGOE_UI, Font.BOLD, 12));
+        button.setFont(new Font(FONT_SEGOE_UI, Font.BOLD, 14));
         return button;
     }
     
@@ -189,7 +192,7 @@ public class JudgeProgressReviewDialog extends JDialog {
         
         JLabel titleLabel = new JLabel("⚖️ Revisione Progressi Team");
         titleLabel.setFont(new Font(FONT_SEGOE_UI, Font.BOLD, 20));
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(Color.BLACK);
         
         JLabel subtitleLabel = new JLabel("Esamina e commenta i progressi dei team durante l'hackathon");
         subtitleLabel.setFont(new Font(FONT_SEGOE_UI, Font.PLAIN, 14));

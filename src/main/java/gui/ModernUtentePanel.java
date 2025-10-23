@@ -507,15 +507,22 @@ public class ModernUtentePanel extends JPanel {
             JPanel buttonPanel = new JPanel(new FlowLayout());
             JButton cambiaButton = new JButton("🔒 Cambia Password");
             JButton annullaButton = new JButton("❌ Annulla");
-            // Styling pulsanti
-            cambiaButton.setBackground(new Color(52, 152, 219));
-            cambiaButton.setForeground(Color.WHITE);
+            // Styling pulsanti - testo NERO per visibilità
+            cambiaButton.setBackground(new Color(70, 130, 180)); // Blu scuro
+            cambiaButton.setForeground(Color.BLACK); // Testo NERO
             cambiaButton.setFocusPainted(false);
-            cambiaButton.setFont(new Font(SEGOE_UI, Font.BOLD, 12));
-            annullaButton.setBackground(new Color(231, 76, 60));
-            annullaButton.setForeground(Color.WHITE);
+            cambiaButton.setFont(new Font(SEGOE_UI, Font.BOLD, 14));
+            cambiaButton.setOpaque(true);
+            cambiaButton.setBorderPainted(true);
+            cambiaButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
+
+            annullaButton.setBackground(new Color(178, 34, 34)); // Rosso scuro
+            annullaButton.setForeground(Color.BLACK); // Testo NERO
             annullaButton.setFocusPainted(false);
-            annullaButton.setFont(new Font(SEGOE_UI, Font.BOLD, 12));
+            annullaButton.setFont(new Font(SEGOE_UI, Font.BOLD, 14));
+            annullaButton.setOpaque(true);
+            annullaButton.setBorderPainted(true);
+            annullaButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
             cambiaButton.addActionListener(e -> {
                 String passwordAttuale = new String(passwordAttualeField.getPassword());
                 String nuovaPassword = new String(nuovaPasswordField.getPassword());

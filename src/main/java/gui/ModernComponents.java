@@ -30,7 +30,7 @@ public final class ModernComponents {
         }
         private void init() {
             setFont(DesignSystem.LABEL_LARGE);
-            setForeground(Color.WHITE);
+            setForeground(Color.BLACK);
             setBackground(DesignSystem.PRIMARY_500);
             setBorder(new DesignSystem.RoundedBorder(DesignSystem.RADIUS_LG));
             setFocusPainted(false);
@@ -483,7 +483,7 @@ public final class ModernComponents {
                     super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                     if (isSelected) {
                         setBackground(DesignSystem.PRIMARY_500);
-                        setForeground(Color.WHITE);
+                        setForeground(Color.BLACK);
                     } else {
                         setBackground(DesignSystem.getBackgroundSecondary());
                         setForeground(DesignSystem.getTextPrimary());
@@ -523,7 +523,7 @@ public final class ModernComponents {
                                                             DesignSystem.SPACE_2XL));
             JLabel label = new JLabel(message);
             label.setFont(DesignSystem.BODY_MEDIUM);
-            label.setForeground(Color.WHITE);
+            label.setForeground(Color.BLACK);
             label.setHorizontalAlignment(SwingConstants.CENTER);
             content.add(label, BorderLayout.CENTER);
             add(content);

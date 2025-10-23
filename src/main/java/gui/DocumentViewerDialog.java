@@ -77,14 +77,22 @@ public class DocumentViewerDialog extends JDialog {
         
         // Buttons
         downloadButton = new JButton("💾 Scarica File");
-        downloadButton.setBackground(new Color(52, 152, 219));
-        downloadButton.setForeground(Color.WHITE);
+        downloadButton.setBackground(new Color(70, 130, 180)); // Blu scuro
+        downloadButton.setForeground(Color.BLACK);
+        downloadButton.setOpaque(true);
+        downloadButton.setBorderPainted(true);
+        downloadButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         downloadButton.setFocusPainted(false);
-        
+        downloadButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+
         closeButton = new JButton("❌ Chiudi");
-        closeButton.setBackground(new Color(231, 76, 60));
-        closeButton.setForeground(Color.WHITE);
+        closeButton.setBackground(new Color(178, 34, 34)); // Rosso scuro
+        closeButton.setForeground(Color.BLACK);
+        closeButton.setOpaque(true);
+        closeButton.setBorderPainted(true);
+        closeButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         closeButton.setFocusPainted(false);
+        closeButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
     }
     
     private void setupLayout() {

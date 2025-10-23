@@ -85,27 +85,30 @@ public class RankingPublicationDialog extends JDialog {
         publishButton = new JButton(PUBLISH_LABEL);
         viewPublishedButton = new JButton(VIEW_PUBLISHED_LABEL);
         
-        // Style buttons
-        previewButton.setBackground(new Color(52, 152, 219)); // Blu
-        previewButton.setForeground(Color.BLACK);
+        // Style buttons - colori scuri con testo bianco
+        previewButton.setBackground(new Color(70, 130, 180)); // Blu scuro
+        previewButton.setForeground(Color.BLACK); // Bianco
         previewButton.setFocusPainted(false);
-        previewButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        previewButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         previewButton.setOpaque(true);
-        previewButton.setBorderPainted(false);
+        previewButton.setBorderPainted(true);
+        previewButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
-        publishButton.setBackground(new Color(46, 204, 113)); // Verde
-        publishButton.setForeground(Color.BLACK);
+        publishButton.setBackground(new Color(34, 139, 34)); // Verde scuro
+        publishButton.setForeground(Color.BLACK); // Bianco
         publishButton.setFocusPainted(false);
-        publishButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        publishButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         publishButton.setOpaque(true);
-        publishButton.setBorderPainted(false);
+        publishButton.setBorderPainted(true);
+        publishButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
-        viewPublishedButton.setBackground(new Color(155, 89, 182)); // Viola
-        viewPublishedButton.setForeground(Color.BLACK);
+        viewPublishedButton.setBackground(new Color(75, 0, 130)); // Viola scuro
+        viewPublishedButton.setForeground(Color.BLACK); // Bianco
         viewPublishedButton.setFocusPainted(false);
-        viewPublishedButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        viewPublishedButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         viewPublishedButton.setOpaque(true);
-        viewPublishedButton.setBorderPainted(false);
+        viewPublishedButton.setBorderPainted(true);
+        viewPublishedButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         
         // Status label
         statusLabel = new JLabel("Pronto per generare anteprima");
@@ -144,12 +147,13 @@ public class RankingPublicationDialog extends JDialog {
         buttonPanel.add(new JSeparator(SwingConstants.VERTICAL));
         
         JButton closeButton = new JButton(CLOSE_LABEL);
-        closeButton.setBackground(new Color(149, 165, 166)); // Grigio
-        closeButton.setForeground(Color.BLACK);
+        closeButton.setBackground(new Color(105, 105, 105)); // Grigio scuro
+        closeButton.setForeground(Color.BLACK); // Bianco
         closeButton.setFocusPainted(false);
-        closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        closeButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         closeButton.setOpaque(true);
-        closeButton.setBorderPainted(false);
+        closeButton.setBorderPainted(true);
+        closeButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         closeButton.addActionListener(e -> dispose());
         buttonPanel.add(closeButton);
         
@@ -394,12 +398,13 @@ public class RankingPublicationDialog extends JDialog {
             // Pulsante chiudi
             JPanel buttonPanel = new JPanel(new FlowLayout());
             JButton closeButton = new JButton(CLOSE_LABEL);
-            closeButton.setBackground(new Color(149, 165, 166)); // Grigio
-            closeButton.setForeground(Color.BLACK);
+            closeButton.setBackground(new Color(105, 105, 105)); // Grigio scuro
+            closeButton.setForeground(Color.BLACK); // Bianco
             closeButton.setFocusPainted(false);
-            closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+            closeButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
             closeButton.setOpaque(true);
-            closeButton.setBorderPainted(false);
+            closeButton.setBorderPainted(true);
+            closeButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
             closeButton.addActionListener(e -> dispose());
             buttonPanel.add(closeButton);
             add(buttonPanel, BorderLayout.SOUTH);

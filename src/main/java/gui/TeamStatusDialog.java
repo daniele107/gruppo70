@@ -79,9 +79,12 @@ public class TeamStatusDialog extends JDialog {
     private JButton createButton(String text, Color backgroundColor) {
         JButton button = new JButton(text);
         button.setBackground(backgroundColor);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
-        button.setFont(new Font(SEGOE_UI, Font.BOLD, 12));
+        button.setFont(new Font(SEGOE_UI, Font.BOLD, 14));
         return button;
     }
     

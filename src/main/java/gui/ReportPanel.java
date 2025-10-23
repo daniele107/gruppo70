@@ -723,10 +723,12 @@ public class ReportPanel extends JPanel {
      */
     private JButton createStyledButton(String text, Color backgroundColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font(SEGOE_UI, Font.BOLD, 12));
-        button.setForeground(Color.WHITE);
+        button.setFont(new Font(SEGOE_UI, Font.BOLD, 14));
+        button.setForeground(Color.BLACK);
         button.setBackground(backgroundColor);
-        button.setBorder(BorderFactory.createEmptyBorder(10, 16, 10, 16));
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         // Hover effect
@@ -749,9 +751,11 @@ public class ReportPanel extends JPanel {
     private JButton createStyledButtonWithTextColor(String text, Color backgroundColor, Color textColor) {
         JButton button = new JButton(text);
         button.setFont(new Font(SEGOE_UI, Font.BOLD, 14)); // Font più grande
-        button.setForeground(textColor); // Testo personalizzato
+        button.setForeground(Color.BLACK); // Forza testo nero per visibilità
         button.setBackground(backgroundColor);
-        button.setBorder(BorderFactory.createEmptyBorder(10, 16, 10, 16));
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         // Hover effect

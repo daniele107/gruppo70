@@ -85,20 +85,32 @@ public class ProgressUploadDialog extends JDialog {
         fileLabel.setForeground(Color.GRAY);
         
         selectFileButton = new JButton("📁 Seleziona Documento");
-        selectFileButton.setBackground(new Color(52, 152, 219));
-        selectFileButton.setForeground(Color.WHITE);
+        selectFileButton.setBackground(new Color(70, 130, 180)); // Blu scuro
+        selectFileButton.setForeground(Color.BLACK);
+        selectFileButton.setOpaque(true);
+        selectFileButton.setBorderPainted(true);
+        selectFileButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         selectFileButton.setFocusPainted(false);
-        
+        selectFileButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+
         uploadButton = new JButton("📤 Carica Progresso");
-        uploadButton.setBackground(new Color(46, 204, 113));
-        uploadButton.setForeground(Color.WHITE);
+        uploadButton.setBackground(new Color(34, 139, 34)); // Verde scuro
+        uploadButton.setForeground(Color.BLACK);
+        uploadButton.setOpaque(true);
+        uploadButton.setBorderPainted(true);
+        uploadButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         uploadButton.setFocusPainted(false);
         uploadButton.setEnabled(false);
-        
+        uploadButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+
         cancelButton = new JButton("❌ Annulla");
-        cancelButton.setBackground(new Color(231, 76, 60));
-        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setBackground(new Color(178, 34, 34)); // Rosso scuro
+        cancelButton.setForeground(Color.BLACK);
+        cancelButton.setOpaque(true);
+        cancelButton.setBorderPainted(true);
+        cancelButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         cancelButton.setFocusPainted(false);
+        cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         
         uploadProgress = new JProgressBar();
         uploadProgress.setStringPainted(true);
@@ -118,7 +130,7 @@ public class ProgressUploadDialog extends JDialog {
         
         JLabel titleLabel = new JLabel("📈 Caricamento Progresso Team");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(Color.BLACK);
         headerPanel.add(titleLabel, BorderLayout.WEST);
         
         JLabel timeLabel = new JLabel(LocalDateTime.now().format(

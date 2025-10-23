@@ -181,11 +181,12 @@ public final class DesignSystem {
         button.setFont(LABEL_LARGE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(new RoundedBorder(RADIUS_LG));
         switch (style) {
             case PRIMARY_FILLED:
                 button.setBackground(PRIMARY_500);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+                button.setOpaque(true);
+                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
                 break;
             case PRIMARY_OUTLINED:
                 button.setBackground(new Color(0, 0, 0, 0));
@@ -204,19 +205,27 @@ public final class DesignSystem {
                 break;
             case SECONDARY_FILLED:
                 button.setBackground(SECONDARY_500);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+                button.setOpaque(true);
+                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
                 break;
             case SUCCESS_FILLED:
                 button.setBackground(SUCCESS_500);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+                button.setOpaque(true);
+                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
                 break;
             case WARNING_FILLED:
                 button.setBackground(WARNING_500);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+                button.setOpaque(true);
+                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
                 break;
             case ERROR_FILLED:
                 button.setBackground(ERROR_500);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+                button.setOpaque(true);
+                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
                 break;
         }
         // Add hover effects

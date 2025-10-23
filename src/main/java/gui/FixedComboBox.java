@@ -132,7 +132,7 @@ public class FixedComboBox<E> extends JComboBox<E> {
             setFont(new Font(FONT_FAMILY, Font.PLAIN, 16));
             if (isSelected) {
                 setBackground(new Color(0, 120, 215));
-                setForeground(Color.WHITE);
+                setForeground(Color.BLACK);
             } else {
                 setBackground(BACKGROUND_COLOR);
                 setForeground(TEXT_COLOR);

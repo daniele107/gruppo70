@@ -194,9 +194,11 @@ public class LoginPanel extends JPanel {
     private JButton createStyledButton(String text, Color backgroundColor) {
         JButton button = new JButton(text);
         button.setFont(new Font(FONT_FAMILY, Font.BOLD, 14));
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
         button.setBackground(backgroundColor);
-        button.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setPreferredSize(new Dimension(200, 45));
