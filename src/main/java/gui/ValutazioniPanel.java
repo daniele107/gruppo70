@@ -59,29 +59,39 @@ public class ValutazioniPanel extends JPanel {
         
         // Style buttons
         assegnaVotiButton.setBackground(new Color(46, 204, 113)); // Verde
-        assegnaVotiButton.setForeground(Color.WHITE);
+        assegnaVotiButton.setForeground(Color.BLACK);
         assegnaVotiButton.setFocusPainted(false);
         assegnaVotiButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        assegnaVotiButton.setOpaque(true);
+        assegnaVotiButton.setBorderPainted(false);
         
         visualizzaClassificaButton.setBackground(new Color(52, 152, 219)); // Blu
-        visualizzaClassificaButton.setForeground(Color.WHITE);
+        visualizzaClassificaButton.setForeground(Color.BLACK);
         visualizzaClassificaButton.setFocusPainted(false);
         visualizzaClassificaButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        visualizzaClassificaButton.setOpaque(true);
+        visualizzaClassificaButton.setBorderPainted(false);
         
         revisioneProgressiButton.setBackground(new Color(155, 89, 182)); // Viola
-        revisioneProgressiButton.setForeground(Color.WHITE);
+        revisioneProgressiButton.setForeground(Color.BLACK);
         revisioneProgressiButton.setFocusPainted(false);
         revisioneProgressiButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        revisioneProgressiButton.setOpaque(true);
+        revisioneProgressiButton.setBorderPainted(false);
         
         debugButton.setBackground(new Color(241, 196, 15)); // Giallo
         debugButton.setForeground(Color.BLACK);
         debugButton.setFocusPainted(false);
         debugButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        debugButton.setOpaque(true);
+        debugButton.setBorderPainted(false);
         
         refreshButton.setBackground(new Color(52, 152, 219)); // Blu
-        refreshButton.setForeground(Color.WHITE);
+        refreshButton.setForeground(Color.BLACK);
         refreshButton.setFocusPainted(false);
         refreshButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        refreshButton.setOpaque(true);
+        refreshButton.setBorderPainted(false);
         
         // Assegna Voti should always be enabled (it's for creating new evaluations)
         assegnaVotiButton.setEnabled(true);
@@ -257,11 +267,15 @@ public class ValutazioniPanel extends JPanel {
         JButton cancelButton = new JButton("Annulla");
         // Styling buttons
         confirmButton.setBackground(new Color(46, 204, 113));
-        confirmButton.setForeground(Color.WHITE);
+        confirmButton.setForeground(Color.BLACK);
         confirmButton.setFocusPainted(false);
+        confirmButton.setOpaque(true);
+        confirmButton.setBorderPainted(false);
         cancelButton.setBackground(new Color(231, 76, 60));
-        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setForeground(Color.BLACK);
         cancelButton.setFocusPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> {
             Team selectedTeam = (Team) teamComboBox.getSelectedItem();
             Integer voto = (Integer) votoSpinner.getValue();
@@ -409,11 +423,15 @@ public class ValutazioniPanel extends JPanel {
             JButton closeButton = new JButton("Chiudi");
             JButton refreshButton = new JButton("Aggiorna");
             closeButton.setBackground(new Color(149, 165, 166));
-            closeButton.setForeground(Color.WHITE);
+            closeButton.setForeground(Color.BLACK);
             closeButton.setFocusPainted(false);
+            closeButton.setOpaque(true);
+            closeButton.setBorderPainted(false);
             refreshButton.setBackground(new Color(52, 152, 219));
-            refreshButton.setForeground(Color.WHITE);
+            refreshButton.setForeground(Color.BLACK);
             refreshButton.setFocusPainted(false);
+            refreshButton.setOpaque(true);
+            refreshButton.setBorderPainted(false);
             closeButton.addActionListener(e -> dialog.dispose());
             refreshButton.addActionListener(e -> {
                 dialog.dispose();

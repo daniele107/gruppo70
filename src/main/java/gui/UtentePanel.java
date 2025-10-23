@@ -46,14 +46,18 @@ public class UtentePanel extends JPanel {
         
         // Style buttons
         modificaProfiloButton.setBackground(new Color(52, 152, 219)); // Blu
-        modificaProfiloButton.setForeground(Color.WHITE);
+        modificaProfiloButton.setForeground(Color.BLACK); // Testo nero per visibilità
         modificaProfiloButton.setFocusPainted(false);
         modificaProfiloButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        modificaProfiloButton.setOpaque(true);
+        modificaProfiloButton.setBorderPainted(false);
         
         cambiaPasswordButton.setBackground(new Color(46, 204, 113)); // Verde
-        cambiaPasswordButton.setForeground(Color.WHITE);
+        cambiaPasswordButton.setForeground(Color.BLACK); // Testo nero per visibilità
         cambiaPasswordButton.setFocusPainted(false);
         cambiaPasswordButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        cambiaPasswordButton.setOpaque(true);
+        cambiaPasswordButton.setBorderPainted(false);
     }
     /**
      * Configura il layout del pannello
@@ -151,14 +155,18 @@ public class UtentePanel extends JPanel {
         
         // Style buttons
         confirmButton.setBackground(new Color(52, 152, 219)); // Blu
-        confirmButton.setForeground(Color.WHITE);
+        confirmButton.setForeground(Color.BLACK); // Testo nero per visibilità
         confirmButton.setFocusPainted(false);
         confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        confirmButton.setOpaque(true);
+        confirmButton.setBorderPainted(false);
         
         cancelButton.setBackground(new Color(231, 76, 60)); // Rosso
-        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setForeground(Color.BLACK); // Testo nero per visibilità
         cancelButton.setFocusPainted(false);
         cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        cancelButton.setOpaque(true);
+        cancelButton.setBorderPainted(false);
         
         confirmButton.addActionListener(e -> {
             String nome = nomeField.getText().trim();
@@ -220,14 +228,18 @@ public class UtentePanel extends JPanel {
         
         // Style buttons
         confirmButton.setBackground(new Color(52, 152, 219)); // Blu
-        confirmButton.setForeground(Color.WHITE);
+        confirmButton.setForeground(Color.BLACK); // Testo nero per visibilità
         confirmButton.setFocusPainted(false);
         confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        confirmButton.setOpaque(true);
+        confirmButton.setBorderPainted(false);
         
         cancelButton.setBackground(new Color(231, 76, 60)); // Rosso
-        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setForeground(Color.BLACK); // Testo nero per visibilità
         cancelButton.setFocusPainted(false);
         cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        cancelButton.setOpaque(true);
+        cancelButton.setBorderPainted(false);
         
         confirmButton.addActionListener(e -> {
             String vecchiaPassword = new String(vecchiaPasswordField.getPassword());

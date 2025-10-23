@@ -58,19 +58,25 @@ public class GestioneRegistrazioniPanel extends JPanel {
         
         // Style buttons
         confermaButton.setBackground(new Color(46, 204, 113)); // Verde
-        confermaButton.setForeground(Color.WHITE);
+        confermaButton.setForeground(Color.BLACK);
         confermaButton.setFocusPainted(false);
         confermaButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        confermaButton.setOpaque(true);
+        confermaButton.setBorderPainted(false);
         
         rifiutaButton.setBackground(new Color(231, 76, 60)); // Rosso
-        rifiutaButton.setForeground(Color.WHITE);
+        rifiutaButton.setForeground(Color.BLACK);
         rifiutaButton.setFocusPainted(false);
         rifiutaButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        rifiutaButton.setOpaque(true);
+        rifiutaButton.setBorderPainted(false);
         
         refreshButton.setBackground(new Color(52, 152, 219)); // Blu
-        refreshButton.setForeground(Color.WHITE);
+        refreshButton.setForeground(Color.BLACK);
         refreshButton.setFocusPainted(false);
         refreshButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        refreshButton.setOpaque(true);
+        refreshButton.setBorderPainted(false);
         
         // Status label
         statusLabel = new JLabel("Seleziona un evento per visualizzare le registrazioni", CENTER);

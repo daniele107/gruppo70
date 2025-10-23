@@ -122,19 +122,25 @@ public class TeamPanel extends JPanel {
         
         // Style buttons
         creaTeamButton.setBackground(new Color(46, 204, 113)); // Verde
-        creaTeamButton.setForeground(Color.WHITE);
+        creaTeamButton.setForeground(Color.BLACK);
         creaTeamButton.setFocusPainted(false);
         creaTeamButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        creaTeamButton.setOpaque(true);
+        creaTeamButton.setBorderPainted(false);
         
         gestisciTeamButton.setBackground(new Color(52, 152, 219)); // Blu
-        gestisciTeamButton.setForeground(Color.WHITE);
+        gestisciTeamButton.setForeground(Color.BLACK);
         gestisciTeamButton.setFocusPainted(false);
         gestisciTeamButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        gestisciTeamButton.setOpaque(true);
+        gestisciTeamButton.setBorderPainted(false);
         
         richiesteJoinButton.setBackground(new Color(155, 89, 182)); // Viola
-        richiesteJoinButton.setForeground(Color.WHITE);
+        richiesteJoinButton.setForeground(Color.BLACK);
         richiesteJoinButton.setFocusPainted(false);
         richiesteJoinButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        richiesteJoinButton.setOpaque(true);
+        richiesteJoinButton.setBorderPainted(false);
         
         // Debug button (temporaneo)
         debugButton = new JButton("🔍 Debug");
@@ -142,6 +148,8 @@ public class TeamPanel extends JPanel {
         debugButton.setForeground(Color.BLACK);
         debugButton.setFocusPainted(false);
         debugButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        debugButton.setOpaque(true);
+        debugButton.setBorderPainted(false);
         debugButton.addActionListener(e -> {
             controller.debugHackathonDisponibili();
             JOptionPane.showMessageDialog(this, "Controlla la console per i dettagli di debug", "Debug Info", JOptionPane.INFORMATION_MESSAGE);
@@ -150,9 +158,11 @@ public class TeamPanel extends JPanel {
         // Refresh button
         refreshButton = new JButton(AGGIORNA_BTN);
         refreshButton.setBackground(new Color(52, 152, 219)); // Blu
-        refreshButton.setForeground(Color.WHITE);
+        refreshButton.setForeground(Color.BLACK);
         refreshButton.setFocusPainted(false);
         refreshButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        refreshButton.setOpaque(true);
+        refreshButton.setBorderPainted(false);
         refreshButton.addActionListener(e -> {
             refreshData();
             JOptionPane.showMessageDialog(this, "Dati aggiornati con successo!", "Aggiornamento Completato", JOptionPane.INFORMATION_MESSAGE);
@@ -326,11 +336,15 @@ public class TeamPanel extends JPanel {
         JButton cancelButton = new JButton(ANNULLA_BTN);
         // Styling buttons
         confirmButton.setBackground(new Color(46, 204, 113));
-        confirmButton.setForeground(Color.WHITE);
+        confirmButton.setForeground(Color.BLACK);
         confirmButton.setFocusPainted(false);
+        confirmButton.setOpaque(true);
+        confirmButton.setBorderPainted(false);
         cancelButton.setBackground(new Color(231, 76, 60));
-        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setForeground(Color.BLACK);
         cancelButton.setFocusPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> {
             String selectedHackathon = (String) hackathonComboBox.getSelectedItem();
             String nomeTeam = nomeTeamField.getText().trim();
@@ -667,9 +681,11 @@ public class TeamPanel extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton closeButton = new JButton("Chiudi");
         closeButton.setBackground(new Color(149, 165, 166)); // Grigio
-        closeButton.setForeground(Color.WHITE);
+        closeButton.setForeground(Color.BLACK);
         closeButton.setFocusPainted(false);
         closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        closeButton.setOpaque(true);
+        closeButton.setBorderPainted(false);
         closeButton.addActionListener(e -> dialog.dispose());
         buttonPanel.add(closeButton);
         // Add all panels to dialog

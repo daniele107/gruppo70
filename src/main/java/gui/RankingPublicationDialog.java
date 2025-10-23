@@ -87,19 +87,25 @@ public class RankingPublicationDialog extends JDialog {
         
         // Style buttons
         previewButton.setBackground(new Color(52, 152, 219)); // Blu
-        previewButton.setForeground(Color.WHITE);
+        previewButton.setForeground(Color.BLACK);
         previewButton.setFocusPainted(false);
         previewButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        previewButton.setOpaque(true);
+        previewButton.setBorderPainted(false);
         
         publishButton.setBackground(new Color(46, 204, 113)); // Verde
-        publishButton.setForeground(Color.WHITE);
+        publishButton.setForeground(Color.BLACK);
         publishButton.setFocusPainted(false);
         publishButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        publishButton.setOpaque(true);
+        publishButton.setBorderPainted(false);
         
         viewPublishedButton.setBackground(new Color(155, 89, 182)); // Viola
-        viewPublishedButton.setForeground(Color.WHITE);
+        viewPublishedButton.setForeground(Color.BLACK);
         viewPublishedButton.setFocusPainted(false);
         viewPublishedButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        viewPublishedButton.setOpaque(true);
+        viewPublishedButton.setBorderPainted(false);
         
         // Status label
         statusLabel = new JLabel("Pronto per generare anteprima");
@@ -139,9 +145,11 @@ public class RankingPublicationDialog extends JDialog {
         
         JButton closeButton = new JButton(CLOSE_LABEL);
         closeButton.setBackground(new Color(149, 165, 166)); // Grigio
-        closeButton.setForeground(Color.WHITE);
+        closeButton.setForeground(Color.BLACK);
         closeButton.setFocusPainted(false);
         closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        closeButton.setOpaque(true);
+        closeButton.setBorderPainted(false);
         closeButton.addActionListener(e -> dispose());
         buttonPanel.add(closeButton);
         
@@ -387,9 +395,11 @@ public class RankingPublicationDialog extends JDialog {
             JPanel buttonPanel = new JPanel(new FlowLayout());
             JButton closeButton = new JButton(CLOSE_LABEL);
             closeButton.setBackground(new Color(149, 165, 166)); // Grigio
-            closeButton.setForeground(Color.WHITE);
+            closeButton.setForeground(Color.BLACK);
             closeButton.setFocusPainted(false);
             closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+            closeButton.setOpaque(true);
+            closeButton.setBorderPainted(false);
             closeButton.addActionListener(e -> dispose());
             buttonPanel.add(closeButton);
             add(buttonPanel, BorderLayout.SOUTH);

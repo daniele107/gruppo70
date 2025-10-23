@@ -51,14 +51,18 @@ public class RegistrazioniPanel extends JPanel {
         
         // Style buttons
         registraUtenteButton.setBackground(new Color(46, 204, 113)); // Verde
-        registraUtenteButton.setForeground(Color.WHITE);
+        registraUtenteButton.setForeground(Color.BLACK);
         registraUtenteButton.setFocusPainted(false);
         registraUtenteButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        registraUtenteButton.setOpaque(true);
+        registraUtenteButton.setBorderPainted(false);
         
         gestisciRegistrazioniButton.setBackground(new Color(52, 152, 219)); // Blu
-        gestisciRegistrazioniButton.setForeground(Color.WHITE);
+        gestisciRegistrazioniButton.setForeground(Color.BLACK);
         gestisciRegistrazioniButton.setFocusPainted(false);
         gestisciRegistrazioniButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        gestisciRegistrazioniButton.setOpaque(true);
+        gestisciRegistrazioniButton.setBorderPainted(false);
         
         // Debug button
         debugButton = new JButton("🔍 Debug Info");
@@ -66,14 +70,18 @@ public class RegistrazioniPanel extends JPanel {
         debugButton.setForeground(Color.BLACK);
         debugButton.setFocusPainted(false);
         debugButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        debugButton.setOpaque(true);
+        debugButton.setBorderPainted(false);
         debugButton.addActionListener(e -> showDebugInfo());
         
         // Refresh button
         refreshButton = new JButton("🔄 Refresh");
         refreshButton.setBackground(new Color(52, 152, 219)); // Blu
-        refreshButton.setForeground(Color.WHITE);
+        refreshButton.setForeground(Color.BLACK);
         refreshButton.setFocusPainted(false);
         refreshButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        refreshButton.setOpaque(true);
+        refreshButton.setBorderPainted(false);
         refreshButton.addActionListener(e -> refreshData());
         // Initially disable buttons that require selection
         gestisciRegistrazioniButton.setEnabled(false);
@@ -193,11 +201,15 @@ public class RegistrazioniPanel extends JPanel {
         JButton cancelButton = new JButton("❌ Annulla");
         // Styling buttons
         confirmButton.setBackground(new Color(46, 204, 113));
-        confirmButton.setForeground(Color.WHITE);
+        confirmButton.setForeground(Color.BLACK);
         confirmButton.setFocusPainted(false);
+        confirmButton.setOpaque(true);
+        confirmButton.setBorderPainted(false);
         cancelButton.setBackground(new Color(231, 76, 60));
-        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setForeground(Color.BLACK);
         cancelButton.setFocusPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> {
             String selectedHackathon = (String) hackathonComboBox.getSelectedItem();
             String selectedRuolo = (String) ruoloComboBox.getSelectedItem();
