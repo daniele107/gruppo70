@@ -48,11 +48,32 @@ public class RegistrazioniPanel extends JPanel {
         // Buttons
         registraUtenteButton = new JButton("Registra Utente");
         gestisciRegistrazioniButton = new JButton("Gestisci Registrazioni");
+        
+        // Style buttons
+        registraUtenteButton.setBackground(new Color(46, 204, 113)); // Verde
+        registraUtenteButton.setForeground(Color.WHITE);
+        registraUtenteButton.setFocusPainted(false);
+        registraUtenteButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        gestisciRegistrazioniButton.setBackground(new Color(52, 152, 219)); // Blu
+        gestisciRegistrazioniButton.setForeground(Color.WHITE);
+        gestisciRegistrazioniButton.setFocusPainted(false);
+        gestisciRegistrazioniButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
         // Debug button
         debugButton = new JButton("🔍 Debug Info");
+        debugButton.setBackground(new Color(241, 196, 15)); // Giallo
+        debugButton.setForeground(Color.BLACK);
+        debugButton.setFocusPainted(false);
+        debugButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         debugButton.addActionListener(e -> showDebugInfo());
+        
         // Refresh button
         refreshButton = new JButton("🔄 Refresh");
+        refreshButton.setBackground(new Color(52, 152, 219)); // Blu
+        refreshButton.setForeground(Color.WHITE);
+        refreshButton.setFocusPainted(false);
+        refreshButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         refreshButton.addActionListener(e -> refreshData());
         // Initially disable buttons that require selection
         gestisciRegistrazioniButton.setEnabled(false);

@@ -56,6 +56,33 @@ public class ValutazioniPanel extends JPanel {
         revisioneProgressiButton = new JButton("📋 Revisione Progressi");
         debugButton = new JButton("\uD83D\uDD0D Debug");
         refreshButton = new JButton("\uD83D\uDD04 Aggiorna");
+        
+        // Style buttons
+        assegnaVotiButton.setBackground(new Color(46, 204, 113)); // Verde
+        assegnaVotiButton.setForeground(Color.WHITE);
+        assegnaVotiButton.setFocusPainted(false);
+        assegnaVotiButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        visualizzaClassificaButton.setBackground(new Color(52, 152, 219)); // Blu
+        visualizzaClassificaButton.setForeground(Color.WHITE);
+        visualizzaClassificaButton.setFocusPainted(false);
+        visualizzaClassificaButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        revisioneProgressiButton.setBackground(new Color(155, 89, 182)); // Viola
+        revisioneProgressiButton.setForeground(Color.WHITE);
+        revisioneProgressiButton.setFocusPainted(false);
+        revisioneProgressiButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        debugButton.setBackground(new Color(241, 196, 15)); // Giallo
+        debugButton.setForeground(Color.BLACK);
+        debugButton.setFocusPainted(false);
+        debugButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        refreshButton.setBackground(new Color(52, 152, 219)); // Blu
+        refreshButton.setForeground(Color.WHITE);
+        refreshButton.setFocusPainted(false);
+        refreshButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
         // Assegna Voti should always be enabled (it's for creating new evaluations)
         assegnaVotiButton.setEnabled(true);
         revisioneProgressiButton.setEnabled(true);

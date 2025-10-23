@@ -119,14 +119,40 @@ public class TeamPanel extends JPanel {
         creaTeamButton = new JButton(CREA_NUOVO_TEAM);
         gestisciTeamButton = new JButton("Gestisci Team");
         richiesteJoinButton = new JButton("Richieste di Join");
+        
+        // Style buttons
+        creaTeamButton.setBackground(new Color(46, 204, 113)); // Verde
+        creaTeamButton.setForeground(Color.WHITE);
+        creaTeamButton.setFocusPainted(false);
+        creaTeamButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        gestisciTeamButton.setBackground(new Color(52, 152, 219)); // Blu
+        gestisciTeamButton.setForeground(Color.WHITE);
+        gestisciTeamButton.setFocusPainted(false);
+        gestisciTeamButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        richiesteJoinButton.setBackground(new Color(155, 89, 182)); // Viola
+        richiesteJoinButton.setForeground(Color.WHITE);
+        richiesteJoinButton.setFocusPainted(false);
+        richiesteJoinButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
         // Debug button (temporaneo)
         debugButton = new JButton("🔍 Debug");
+        debugButton.setBackground(new Color(241, 196, 15)); // Giallo
+        debugButton.setForeground(Color.BLACK);
+        debugButton.setFocusPainted(false);
+        debugButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         debugButton.addActionListener(e -> {
             controller.debugHackathonDisponibili();
             JOptionPane.showMessageDialog(this, "Controlla la console per i dettagli di debug", "Debug Info", JOptionPane.INFORMATION_MESSAGE);
         });
+        
         // Refresh button
         refreshButton = new JButton(AGGIORNA_BTN);
+        refreshButton.setBackground(new Color(52, 152, 219)); // Blu
+        refreshButton.setForeground(Color.WHITE);
+        refreshButton.setFocusPainted(false);
+        refreshButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         refreshButton.addActionListener(e -> {
             refreshData();
             JOptionPane.showMessageDialog(this, "Dati aggiornati con successo!", "Aggiornamento Completato", JOptionPane.INFORMATION_MESSAGE);
@@ -640,6 +666,10 @@ public class TeamPanel extends JPanel {
         // Close button
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton closeButton = new JButton("Chiudi");
+        closeButton.setBackground(new Color(149, 165, 166)); // Grigio
+        closeButton.setForeground(Color.WHITE);
+        closeButton.setFocusPainted(false);
+        closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         closeButton.addActionListener(e -> dialog.dispose());
         buttonPanel.add(closeButton);
         // Add all panels to dialog

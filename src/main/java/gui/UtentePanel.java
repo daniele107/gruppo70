@@ -43,6 +43,17 @@ public class UtentePanel extends JPanel {
         // Buttons
         modificaProfiloButton = new JButton("Modifica Profilo");
         cambiaPasswordButton = new JButton(CAMBIA_PASSWORD_TEXT);
+        
+        // Style buttons
+        modificaProfiloButton.setBackground(new Color(52, 152, 219)); // Blu
+        modificaProfiloButton.setForeground(Color.WHITE);
+        modificaProfiloButton.setFocusPainted(false);
+        modificaProfiloButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        cambiaPasswordButton.setBackground(new Color(46, 204, 113)); // Verde
+        cambiaPasswordButton.setForeground(Color.WHITE);
+        cambiaPasswordButton.setFocusPainted(false);
+        cambiaPasswordButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
     }
     /**
      * Configura il layout del pannello
@@ -137,6 +148,18 @@ public class UtentePanel extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton confirmButton = new JButton("Salva");
         JButton cancelButton = new JButton("Annulla");
+        
+        // Style buttons
+        confirmButton.setBackground(new Color(52, 152, 219)); // Blu
+        confirmButton.setForeground(Color.WHITE);
+        confirmButton.setFocusPainted(false);
+        confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        cancelButton.setBackground(new Color(231, 76, 60)); // Rosso
+        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setFocusPainted(false);
+        cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
         confirmButton.addActionListener(e -> {
             String nome = nomeField.getText().trim();
             String cognome = cognomeField.getText().trim();
@@ -194,6 +217,18 @@ public class UtentePanel extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton confirmButton = new JButton(CAMBIA_PASSWORD_TEXT);
         JButton cancelButton = new JButton("Annulla");
+        
+        // Style buttons
+        confirmButton.setBackground(new Color(52, 152, 219)); // Blu
+        confirmButton.setForeground(Color.WHITE);
+        confirmButton.setFocusPainted(false);
+        confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        cancelButton.setBackground(new Color(231, 76, 60)); // Rosso
+        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setFocusPainted(false);
+        cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
         confirmButton.addActionListener(e -> {
             String vecchiaPassword = new String(vecchiaPasswordField.getPassword());
             String nuovaPassword = new String(nuovaPasswordField.getPassword());

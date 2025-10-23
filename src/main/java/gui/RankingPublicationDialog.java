@@ -85,6 +85,22 @@ public class RankingPublicationDialog extends JDialog {
         publishButton = new JButton(PUBLISH_LABEL);
         viewPublishedButton = new JButton(VIEW_PUBLISHED_LABEL);
         
+        // Style buttons
+        previewButton.setBackground(new Color(52, 152, 219)); // Blu
+        previewButton.setForeground(Color.WHITE);
+        previewButton.setFocusPainted(false);
+        previewButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        publishButton.setBackground(new Color(46, 204, 113)); // Verde
+        publishButton.setForeground(Color.WHITE);
+        publishButton.setFocusPainted(false);
+        publishButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
+        viewPublishedButton.setBackground(new Color(155, 89, 182)); // Viola
+        viewPublishedButton.setForeground(Color.WHITE);
+        viewPublishedButton.setFocusPainted(false);
+        viewPublishedButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        
         // Status label
         statusLabel = new JLabel("Pronto per generare anteprima");
     }
@@ -122,6 +138,10 @@ public class RankingPublicationDialog extends JDialog {
         buttonPanel.add(new JSeparator(SwingConstants.VERTICAL));
         
         JButton closeButton = new JButton(CLOSE_LABEL);
+        closeButton.setBackground(new Color(149, 165, 166)); // Grigio
+        closeButton.setForeground(Color.WHITE);
+        closeButton.setFocusPainted(false);
+        closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         closeButton.addActionListener(e -> dispose());
         buttonPanel.add(closeButton);
         
@@ -366,6 +386,10 @@ public class RankingPublicationDialog extends JDialog {
             // Pulsante chiudi
             JPanel buttonPanel = new JPanel(new FlowLayout());
             JButton closeButton = new JButton(CLOSE_LABEL);
+            closeButton.setBackground(new Color(149, 165, 166)); // Grigio
+            closeButton.setForeground(Color.WHITE);
+            closeButton.setFocusPainted(false);
+            closeButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
             closeButton.addActionListener(e -> dispose());
             buttonPanel.add(closeButton);
             add(buttonPanel, BorderLayout.SOUTH);
