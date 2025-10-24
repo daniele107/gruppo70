@@ -67,6 +67,41 @@ public class ReportGeneratorDialog extends JDialog {
     private static final String NEWLINE = "\n";
     private static final String FONT_NAME = "Segoe UI";
     private static final String JSON_COMMA = "\",";
+
+    // Constants for PDF formatting
+    private static final String PLACEHOLDER = "PLACEHOLDER";
+    private static final String PDF_SEPARATOR = "│";
+    private static final String PDF_WIDTH_FORMAT = "%-40s";
+    private static final String STATUS_ACTIVE = "ATTIVO";
+    private static final String STATUS_ACTIVE_EXCEL = "ACTIVE";
+
+    // Constants for report sections
+    private static final String SECTION_STATISTICS = "STATISTICHE GENERALI";
+    private static final String SECTION_TEAMS = "VALUTAZIONI TEAM";
+    private static final String LABEL_TOTAL_USERS = "Totale Utenti";
+    private static final String LABEL_TOTAL_HACKATHONS = "Totale Hackathon";
+    private static final String LABEL_TOTAL_TEAMS = "Totale Team";
+    private static final String LABEL_TOTAL_DOCUMENTS = "Totale Documenti";
+    private static final String LABEL_AVERAGE_SCORES = "Media Voti";
+    private static final String LABEL_COMPLETED_EVALUATIONS = "Valutazioni Completate";
+    private static final String LABEL_TEAMS_REGISTERED = "TEAM REGISTRATI";
+    private static final String LABEL_TEAM_DATA = "DATI TEAM";
+    private static final String SHEET_STATISTICS = "=== STATISTICS SHEET ===";
+    private static final String SHEET_TEAMS = "=== TEAMS SHEET ===";
+    private static final String SHEET_EVALUATIONS = "=== EVALUATIONS SHEET ===";
+
+    // Box drawing characters
+    private static final String BOX_HORIZONTAL = "─";
+    private static final String BOX_VERTICAL = "│";
+    private static final String BOX_TOP_LEFT = "┌";
+    private static final String BOX_TOP_RIGHT = "┐";
+    private static final String BOX_BOTTOM_LEFT = "└";
+    private static final String BOX_BOTTOM_RIGHT = "┘";
+    private static final String BOX_MIDDLE_LEFT = "├";
+    private static final String BOX_MIDDLE_RIGHT = "┤";
+    private static final String BOX_MIDDLE_TOP = "┬";
+    private static final String BOX_MIDDLE_BOTTOM = "┴";
+    private static final String BOX_CROSS = "┼";
     
     private final transient Controller controller;
     // Removed unused parent field
@@ -1139,7 +1174,7 @@ public class ReportGeneratorDialog extends JDialog {
         
         StringBuilder preview = new StringBuilder();
         preview.append("📊 ANTEPRIMA REPORT\n");
-        preview.append("═══════════════════════════════════════════════════════════════════\n\n");
+        preview.append("BOX_HORIZONTAL.repeat(67)\n\n");
         
         preview.append("📋 INFORMAZIONI REPORT:\n");
         preview.append("Tipo: ").append(reportType.toString()).append("\n");
@@ -1151,7 +1186,7 @@ public class ReportGeneratorDialog extends JDialog {
         }
         
         preview.append("\n📊 CONTENUTO:\n");
-        preview.append("═══════════════════════════════════════════════════════════════════\n");
+        preview.append("BOX_HORIZONTAL.repeat(67)\n");
         
         // Use controller to generate full text
         String fullReport = generateTextContent(reportData);
@@ -1180,7 +1215,6 @@ public class ReportGeneratorDialog extends JDialog {
                 return generateHTMLContent(reportData);
             case JSON:
                 return generateJSONContent(reportData);
-            case TEXT:
             default:
                 return generateTextContent(reportData);
         }
@@ -1210,9 +1244,9 @@ public class ReportGeneratorDialog extends JDialog {
             csv.append("STATISTICHE\n");
             csv.append("Metrica,Valore").append(NEWLINE);
             Statistics stats = reportData.getStatistiche();
-            csv.append("Totale Utenti,").append(stats.getTotaleUtenti()).append(NEWLINE);
-            csv.append("Totale Hackathon,").append(stats.getTotaleHackathon()).append(NEWLINE);
-            csv.append("Totale Team,").append(stats.getTotaleTeam()).append(NEWLINE);
+            csv.append(LABEL_TOTAL_USERS).append(",").append(stats.getTotaleUtenti()).append(NEWLINE);
+            csv.append(LABEL_TOTAL_HACKATHONS).append(",").append(stats.getTotaleHackathon()).append(NEWLINE);
+            csv.append(LABEL_TOTAL_TEAMS).append(",").append(stats.getTotaleTeam()).append(NEWLINE);
         }
         
         return csv.toString();
@@ -1369,20 +1403,20 @@ public class ReportGeneratorDialog extends JDialog {
 
         // Header
         text.append("HACKATHON MANAGER - REPORT").append(NEWLINE);
-        text.append("═══════════════════════════════════════════════════════════════════").append(NEWLINE);
+        text.append("BOX_HORIZONTAL.repeat(67)").append(NEWLINE);
         text.append("Titolo: ").append(reportData.getTitolo()).append(NEWLINE);
         text.append("Tipo: ").append(reportData.getTipoReport()).append(NEWLINE);
         text.append("Data generazione: ").append(reportData.getDataGenerazione()).append(NEWLINE);
-        text.append("═══════════════════════════════════════════════════════════════════").append(NEWLINE);
+        text.append("BOX_HORIZONTAL.repeat(67)").append(NEWLINE);
         text.append(NEWLINE);
 
         // Teams section
         if (reportData.getTeams() != null && !reportData.getTeams().isEmpty()) {
-            text.append("TEAM REGISTRATI").append(NEWLINE);
-            text.append("───────────────────────────────────────────────────────────────────").append(NEWLINE);
+            text.append(LABEL_TEAMS_REGISTERED).append(NEWLINE);
+            text.append(BOX_HORIZONTAL.repeat(67)).append(NEWLINE);
 
             for (Team team : reportData.getTeams()) {
-                String status = team.getId() == -1 ? "PLACEHOLDER" : "ATTIVO";
+                String status = team.getId() == -1 ? PLACEHOLDER : STATUS_ACTIVE;
                 text.append("ID: ").append(team.getId())
                     .append(" | Nome: ").append(team.getNome())
                     .append(" | Hackathon: ").append(team.getHackathonId())
@@ -1395,23 +1429,23 @@ public class ReportGeneratorDialog extends JDialog {
 
         // Statistics section
         if (reportData.getStatistiche() != null) {
-            text.append("STATISTICHE GENERALI").append(NEWLINE);
-            text.append("───────────────────────────────────────────────────────────────────").append(NEWLINE);
+            text.append(SECTION_STATISTICS).append(NEWLINE);
+            text.append(BOX_HORIZONTAL.repeat(67)).append(NEWLINE);
 
             Statistics stats = reportData.getStatistiche();
-            text.append("Totale Utenti: ").append(stats.getTotaleUtenti()).append(NEWLINE);
-            text.append("Totale Hackathon: ").append(stats.getTotaleHackathon()).append(NEWLINE);
-            text.append("Totale Team: ").append(stats.getTotaleTeam()).append(NEWLINE);
-            text.append("Totale Documenti: ").append(stats.getTotaleDocumenti()).append(NEWLINE);
-            text.append("Media Voti: ").append(String.format("%.2f", stats.getMediaVoti())).append(NEWLINE);
-            text.append("Valutazioni Completate: ").append(stats.getValutazioniCompletate()).append(NEWLINE);
+            text.append(LABEL_TOTAL_USERS).append(": ").append(stats.getTotaleUtenti()).append(NEWLINE);
+            text.append(LABEL_TOTAL_HACKATHONS).append(": ").append(stats.getTotaleHackathon()).append(NEWLINE);
+            text.append(LABEL_TOTAL_TEAMS).append(": ").append(stats.getTotaleTeam()).append(NEWLINE);
+            text.append(LABEL_TOTAL_DOCUMENTS).append(": ").append(stats.getTotaleDocumenti()).append(NEWLINE);
+            text.append(LABEL_AVERAGE_SCORES).append(": ").append(String.format("%.2f", stats.getMediaVoti())).append(NEWLINE);
+            text.append(LABEL_COMPLETED_EVALUATIONS).append(": ").append(stats.getValutazioniCompletate()).append(NEWLINE);
             text.append(NEWLINE);
         }
 
         // Evaluations section
         if (reportData.getValutazioni() != null && !reportData.getValutazioni().isEmpty()) {
-            text.append("VALUTAZIONI TEAM").append(NEWLINE);
-            text.append("───────────────────────────────────────────────────────────────────").append(NEWLINE);
+            text.append(SECTION_TEAMS).append(NEWLINE);
+            text.append(BOX_HORIZONTAL.repeat(67)).append(NEWLINE);
 
             for (Valutazione valutazione : reportData.getValutazioni()) {
                 String date = valutazione.getDataValutazione() != null ?
@@ -1430,7 +1464,7 @@ public class ReportGeneratorDialog extends JDialog {
         }
 
         // Footer
-        text.append("═══════════════════════════════════════════════════════════════════").append(NEWLINE);
+        text.append("BOX_HORIZONTAL.repeat(67)").append(NEWLINE);
         text.append("Report generato da Hackathon Manager").append(NEWLINE);
         text.append("Data: ").append(LocalDateTime.now()).append(NEWLINE);
 
@@ -1444,92 +1478,92 @@ public class ReportGeneratorDialog extends JDialog {
         StringBuilder pdf = new StringBuilder();
 
         // Header PDF
-        pdf.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-        pdf.append("║                              HACKATHON MANAGER                               ║\n");
-        pdf.append("║                          REPORT GENERATO AUTOMATICAMENTE                     ║\n");
-        pdf.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-        pdf.append("║ Titolo: ").append(String.format("%-65s", reportData.getTitolo())).append("║\n");
-        pdf.append("║ Tipo:   ").append(String.format("%-65s", reportData.getTipoReport())).append("║\n");
-        pdf.append("║ Data:   ").append(String.format("%-65s", reportData.getDataGenerazione())).append("║\n");
-        pdf.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
+        pdf.append(BOX_TOP_LEFT).append(BOX_HORIZONTAL.repeat(79)).append(BOX_TOP_RIGHT).append(NEWLINE);
+        pdf.append(BOX_VERTICAL).append("                              HACKATHON MANAGER                               ").append(BOX_VERTICAL).append(NEWLINE);
+        pdf.append(BOX_VERTICAL).append("                          REPORT GENERATO AUTOMATICAMENTE                     ").append(BOX_VERTICAL).append(NEWLINE);
+        pdf.append(BOX_MIDDLE_LEFT).append(BOX_HORIZONTAL.repeat(79)).append(BOX_MIDDLE_RIGHT).append(NEWLINE);
+        pdf.append(BOX_VERTICAL).append(" Titolo: ").append(String.format("%-65s", reportData.getTitolo())).append(BOX_VERTICAL).append(NEWLINE);
+        pdf.append(BOX_VERTICAL).append(" Tipo:   ").append(String.format("%-65s", reportData.getTipoReport())).append(BOX_VERTICAL).append(NEWLINE);
+        pdf.append(BOX_VERTICAL).append(" Data:   ").append(String.format("%-65s", reportData.getDataGenerazione())).append(BOX_VERTICAL).append(NEWLINE);
+        pdf.append(BOX_BOTTOM_LEFT).append(BOX_HORIZONTAL.repeat(79)).append(BOX_BOTTOM_RIGHT).append(NEWLINE).append(NEWLINE);
 
         // Sezione Teams
         if (reportData.getTeams() != null && !reportData.getTeams().isEmpty()) {
-            pdf.append("┌─────────────────────────────────────────────────────────────────────────────┐\n");
-            pdf.append("│                                DATI TEAM                                    │\n");
-            pdf.append("├─────────────────────────────────────────────────────────────────────────────┤\n");
-            pdf.append("│ ID  │ Nome Team              │ Hackathon │ Capo Team │ Membri Max │ Stato   │\n");
-            pdf.append("├─────┼────────────────────────┼───────────┼───────────┼────────────┼─────────┤\n");
+            pdf.append(BOX_TOP_LEFT).append(BOX_HORIZONTAL.repeat(77)).append(BOX_TOP_RIGHT).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append("                                ").append(LABEL_TEAM_DATA).append("                                    ").append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(BOX_MIDDLE_LEFT).append(BOX_HORIZONTAL.repeat(77)).append(BOX_MIDDLE_RIGHT).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append(" ID  ").append(PDF_SEPARATOR).append(" Nome Team              ").append(PDF_SEPARATOR).append(" Hackathon ").append(PDF_SEPARATOR).append(" Capo Team ").append(PDF_SEPARATOR).append(" Membri Max ").append(PDF_SEPARATOR).append(" Stato   ").append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(BOX_MIDDLE_LEFT).append(BOX_HORIZONTAL.repeat(5)).append(BOX_CROSS).append(BOX_HORIZONTAL.repeat(24)).append(BOX_CROSS).append(BOX_HORIZONTAL.repeat(11)).append(BOX_CROSS).append(BOX_HORIZONTAL.repeat(11)).append(BOX_CROSS).append(BOX_HORIZONTAL.repeat(12)).append(BOX_CROSS).append(BOX_HORIZONTAL.repeat(9)).append(BOX_MIDDLE_RIGHT).append(NEWLINE);
 
             for (Team team : reportData.getTeams()) {
-                String status = "ATTIVO";
-                if (team.getId() == -1) status = "PLACEHOLDER";
+                String status = STATUS_ACTIVE;
+                if (team.getId() == -1) status = PLACEHOLDER;
 
-                pdf.append("│ ")
+                pdf.append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-3s", team.getId()))
-                   .append(" │ ")
+                   .append(" ").append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-22s", truncate(team.getNome(), 22)))
-                   .append(" │ ")
+                   .append(" ").append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-9s", team.getHackathonId()))
-                   .append(" │ ")
+                   .append(" ").append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-9s", team.getCapoTeamId()))
-                   .append(" │ ")
+                   .append(" ").append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-10s", team.getDimensioneMassima()))
-                   .append(" │ ")
+                   .append(" ").append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-7s", status))
-                   .append(" │\n");
+                   .append(" ").append(PDF_SEPARATOR).append(NEWLINE);
             }
-            pdf.append("└─────────────────────────────────────────────────────────────────────────────┘\n\n");
+            pdf.append(BOX_BOTTOM_LEFT).append(BOX_HORIZONTAL.repeat(77)).append(BOX_BOTTOM_RIGHT).append(NEWLINE).append(NEWLINE);
         }
 
         // Sezione Statistiche
         if (reportData.getStatistiche() != null) {
-            pdf.append("┌─────────────────────────────────────────────────────────────────────────────┐\n");
-            pdf.append("│                           STATISTICHE GENERALI                              │\n");
-            pdf.append("├─────────────────────────────────────────────────────────────────────────────┤\n");
+            pdf.append(BOX_TOP_LEFT).append(BOX_HORIZONTAL.repeat(77)).append(BOX_TOP_RIGHT).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append("                           ").append(SECTION_STATISTICS).append("                              ").append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(BOX_MIDDLE_LEFT).append(BOX_HORIZONTAL.repeat(77)).append(BOX_MIDDLE_RIGHT).append(NEWLINE);
 
             Statistics stats = reportData.getStatistiche();
-            pdf.append("│ Totale Utenti:          ").append(String.format("%-40s", stats.getTotaleUtenti())).append("│\n");
-            pdf.append("│ Totale Hackathon:       ").append(String.format("%-40s", stats.getTotaleHackathon())).append("│\n");
-            pdf.append("│ Totale Team:            ").append(String.format("%-40s", stats.getTotaleTeam())).append("│\n");
-            pdf.append("│ Totale Documenti:       ").append(String.format("%-40s", stats.getTotaleDocumenti())).append("│\n");
-            pdf.append("│ Media Voti:             ").append(String.format("%-40s", String.format("%.2f", stats.getMediaVoti()))).append("│\n");
-            pdf.append("│ Valutazioni Completate: ").append(String.format("%-40s", stats.getValutazioniCompletate())).append("│\n");
+            pdf.append(PDF_SEPARATOR).append(" Totale Utenti:          ").append(String.format(PDF_WIDTH_FORMAT, stats.getTotaleUtenti())).append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append(" Totale Hackathon:       ").append(String.format(PDF_WIDTH_FORMAT, stats.getTotaleHackathon())).append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append(" Totale Team:            ").append(String.format(PDF_WIDTH_FORMAT, stats.getTotaleTeam())).append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append(" Totale Documenti:       ").append(String.format(PDF_WIDTH_FORMAT, stats.getTotaleDocumenti())).append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append(" Media Voti:             ").append(String.format(PDF_WIDTH_FORMAT, String.format("%.2f", stats.getMediaVoti()))).append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append(" Valutazioni Completate: ").append(String.format(PDF_WIDTH_FORMAT, stats.getValutazioniCompletate())).append(PDF_SEPARATOR).append(NEWLINE);
 
-            pdf.append("└─────────────────────────────────────────────────────────────────────────────┘\n\n");
+            pdf.append(BOX_BOTTOM_LEFT).append(BOX_HORIZONTAL.repeat(77)).append(BOX_BOTTOM_RIGHT).append(NEWLINE).append(NEWLINE);
         }
 
         // Sezione Valutazioni
         if (reportData.getValutazioni() != null && !reportData.getValutazioni().isEmpty()) {
-            pdf.append("┌─────────────────────────────────────────────────────────────────────────────┐\n");
-            pdf.append("│                           VALUTAZIONI TEAM                                  │\n");
-            pdf.append("├─────────────────────────────────────────────────────────────────────────────┤\n");
-            pdf.append("│ Team │ Giudice │ Voto │ Commento                                    │ Data      │\n");
-            pdf.append("├──────┼─────────┼──────┼─────────────────────────────────────────────┼───────────┤\n");
+            pdf.append(BOX_TOP_LEFT).append(BOX_HORIZONTAL.repeat(77)).append(BOX_TOP_RIGHT).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append("                           ").append(SECTION_TEAMS).append("                                  ").append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(BOX_MIDDLE_LEFT).append(BOX_HORIZONTAL.repeat(77)).append(BOX_MIDDLE_RIGHT).append(NEWLINE);
+            pdf.append(PDF_SEPARATOR).append(" Team ").append(PDF_SEPARATOR).append(" Giudice ").append(PDF_SEPARATOR).append(" Voto ").append(PDF_SEPARATOR).append(" Commento                                    ").append(PDF_SEPARATOR).append(" Data      ").append(PDF_SEPARATOR).append(NEWLINE);
+            pdf.append(BOX_MIDDLE_LEFT).append(BOX_HORIZONTAL.repeat(6)).append(BOX_CROSS).append(BOX_HORIZONTAL.repeat(9)).append(BOX_CROSS).append(BOX_HORIZONTAL.repeat(6)).append(BOX_CROSS).append(BOX_HORIZONTAL.repeat(45)).append(BOX_CROSS).append(BOX_HORIZONTAL.repeat(11)).append(BOX_MIDDLE_RIGHT).append(NEWLINE);
 
             for (Valutazione valutazione : reportData.getValutazioni()) {
-                pdf.append("│ ")
+                pdf.append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-4s", valutazione.getTeamId()))
-                   .append(" │ ")
+                   .append(" ").append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-7s", valutazione.getGiudiceId()))
-                   .append(" │ ")
+                   .append(" ").append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-4s", valutazione.getVoto()))
-                   .append(" │ ")
+                   .append(" ").append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-43s", truncate(valutazione.getCommento(), 43)))
-                   .append(" │ ")
+                   .append(" ").append(PDF_SEPARATOR).append(" ")
                    .append(String.format("%-9s", valutazione.getDataValutazione() != null ?
                        valutazione.getDataValutazione().toString().substring(0, 10) : "N/A"))
-                   .append(" │\n");
+                   .append(" ").append(PDF_SEPARATOR).append(NEWLINE);
             }
-            pdf.append("└─────────────────────────────────────────────────────────────────────────────┘\n\n");
+            pdf.append(BOX_BOTTOM_LEFT).append(BOX_HORIZONTAL.repeat(77)).append(BOX_BOTTOM_RIGHT).append(NEWLINE).append(NEWLINE);
         }
 
         // Footer
-        pdf.append("════════════════════════════════════════════════════════════════════════════════\n");
+        pdf.append(BOX_HORIZONTAL.repeat(67)).append(NEWLINE);
         pdf.append("Report generato automaticamente da Hackathon Manager\n");
         pdf.append("Data generazione: ").append(LocalDateTime.now()).append("\n");
         pdf.append("Formato: PDF (Portable Document Format)\n");
-        pdf.append("════════════════════════════════════════════════════════════════════════════════\n");
+        pdf.append(BOX_HORIZONTAL.repeat(67)).append(NEWLINE);
 
         return pdf.toString();
     }
@@ -1549,11 +1583,11 @@ public class ReportGeneratorDialog extends JDialog {
 
         // Sheet 1: Teams
         if (reportData.getTeams() != null && !reportData.getTeams().isEmpty()) {
-            excel.append("=== TEAMS SHEET ===").append(NEWLINE);
+            excel.append(SHEET_TEAMS).append(NEWLINE);
             excel.append("Team ID,Team Name,Hackathon ID,Team Leader ID,Max Members,Current Status").append(NEWLINE);
 
             for (Team team : reportData.getTeams()) {
-                String status = team.getId() == -1 ? "PLACEHOLDER" : "ACTIVE";
+                String status = team.getId() == -1 ? PLACEHOLDER : STATUS_ACTIVE_EXCEL;
                 excel.append(team.getId()).append(",")
                      .append("\"").append(team.getNome()).append("\",")
                      .append(team.getHackathonId()).append(",")
@@ -1566,22 +1600,22 @@ public class ReportGeneratorDialog extends JDialog {
 
         // Sheet 2: Statistics
         if (reportData.getStatistiche() != null) {
-            excel.append("=== STATISTICS SHEET ===").append(NEWLINE);
+            excel.append(SHEET_STATISTICS).append(NEWLINE);
             excel.append("Metric,Value,Description").append(NEWLINE);
 
             Statistics stats = reportData.getStatistiche();
-            excel.append("\"Total Users\",").append(stats.getTotaleUtenti()).append(",\"Total number of registered users\"").append(NEWLINE);
-            excel.append("\"Total Hackathons\",").append(stats.getTotaleHackathon()).append(",\"Total number of hackathons\"").append(NEWLINE);
-            excel.append("\"Total Teams\",").append(stats.getTotaleTeam()).append(",\"Total number of teams\"").append(NEWLINE);
-            excel.append("\"Total Documents\",").append(stats.getTotaleDocumenti()).append(",\"Total uploaded documents\"").append(NEWLINE);
-            excel.append("\"Average Score\",").append(String.format("%.2f", stats.getMediaVoti())).append(",\"Average team evaluation score\"").append(NEWLINE);
-            excel.append("\"Completed Evaluations\",").append(stats.getValutazioniCompletate()).append(",\"Number of completed evaluations\"").append(NEWLINE);
+            excel.append("\"").append(LABEL_TOTAL_USERS).append("\",").append(stats.getTotaleUtenti()).append(",\"Total number of registered users\"").append(NEWLINE);
+            excel.append("\"").append(LABEL_TOTAL_HACKATHONS).append("\",").append(stats.getTotaleHackathon()).append(",\"Total number of hackathons\"").append(NEWLINE);
+            excel.append("\"").append(LABEL_TOTAL_TEAMS).append("\",").append(stats.getTotaleTeam()).append(",\"Total number of teams\"").append(NEWLINE);
+            excel.append("\"").append(LABEL_TOTAL_DOCUMENTS).append("\",").append(stats.getTotaleDocumenti()).append(",\"Total uploaded documents\"").append(NEWLINE);
+            excel.append("\"").append(LABEL_AVERAGE_SCORES).append("\",").append(String.format("%.2f", stats.getMediaVoti())).append(",\"Average team evaluation score\"").append(NEWLINE);
+            excel.append("\"").append(LABEL_COMPLETED_EVALUATIONS).append("\",").append(stats.getValutazioniCompletate()).append(",\"Number of completed evaluations\"").append(NEWLINE);
             excel.append(NEWLINE);
         }
 
         // Sheet 3: Evaluations
         if (reportData.getValutazioni() != null && !reportData.getValutazioni().isEmpty()) {
-            excel.append("=== EVALUATIONS SHEET ===").append(NEWLINE);
+            excel.append(SHEET_EVALUATIONS).append(NEWLINE);
             excel.append("Team ID,Judge ID,Score,Comment,Evaluation Date,Status").append(NEWLINE);
 
             for (Valutazione valutazione : reportData.getValutazioni()) {

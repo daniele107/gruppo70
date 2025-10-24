@@ -901,18 +901,18 @@ public class TeamPanel extends JPanel {
                     JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            // Invia come richiesta di join con messaggio motivazionale
-            boolean success = controller.inviaRichiestaJoin(team.getId(), msg == null ? "" : msg.trim());
+            // Invita l'utente al team (il capoteam invita direttamente)
+            boolean success = controller.invitaUtenteAlTeam(team.getId(), selectedUser.getId());
             if (success) {
                 JOptionPane.showMessageDialog(inviteDialog,
-                    "✅ Richiesta inviata con successo. Il capo team potrà accettarla o rifiutarla.",
-                    "Richiesta Inviata",
+                    "✅ " + selectedUser.getNome() + " " + selectedUser.getCognome() + " è stato aggiunto al team!",
+                    "Membro Aggiunto",
                     JOptionPane.INFORMATION_MESSAGE);
                 inviteDialog.dispose();
             } else {
                 JOptionPane.showMessageDialog(inviteDialog,
-                    "\u274C Errore durante l'invio della richiesta",
-                    "Errore Richiesta",
+                    "\u274C Errore durante l'aggiunta del membro.\nVerifica che l'utente sia registrato e confermato all'hackathon.",
+                    "Errore Invito",
                     JOptionPane.ERROR_MESSAGE);
             }
         });

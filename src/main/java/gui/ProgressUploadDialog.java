@@ -27,7 +27,7 @@ public class ProgressUploadDialog extends JDialog {
     private static final String UPLOAD_DIRECTORY = "uploads/progress";
     
     private final Controller controller;
-    private final MainFrame parentFrame;
+    private final JFrame parentFrame;
     private Team selectedTeam;
     
     // Components
@@ -43,7 +43,7 @@ public class ProgressUploadDialog extends JDialog {
     
     private File selectedFile;
     
-    public ProgressUploadDialog(MainFrame parent, Controller controller) {
+    public ProgressUploadDialog(JFrame parent, Controller controller) {
         super(parent, "Carica Progresso Team", true);
         this.parentFrame = parent;
         this.controller = controller;
@@ -296,7 +296,11 @@ public class ProgressUploadDialog extends JDialog {
                         timer.setRepeats(false);
                         timer.start();
                         
-                        parentFrame.showToast("Progresso caricato con successo!", "success");
+                        // Mostra messaggio di successo
+                        JOptionPane.showMessageDialog(ProgressUploadDialog.this,
+                            "Progresso caricato con successo!",
+                            "Caricamento Completato",
+                            JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         uploadProgress.setString("❌ Upload fallito");
                         statusLabel.setText("❌ Errore durante il caricamento");

@@ -15,6 +15,27 @@ public class Main {
      * @param args argomenti da riga di comando (non utilizzati)
      */
     public static void main(String[] args) {
+        // Test configurazione database prima di avviare la GUI
+        System.out.println("🔍 Test configurazione database...");
+        try {
+            var dataSource = database.DataSourceFactory.createDataSource();
+            System.out.println("✅ DataSource creato con successo");
+
+            // Test metodo getHackathonInCorso()
+            System.out.println("🔍 Test getHackathonInCorso()...");
+            var connectionManager = new database.ConnectionManager(dataSource);
+            var hackathonDAO = new dao.postgres.HackathonPostgresDAO(connectionManager);
+            var hackathons = hackathonDAO.findInCorso();
+            System.out.println("📊 Hackathon in corso trovati: " + hackathons.size());
+            for (var h : hackathons) {
+                System.out.println("  - " + h.getNome() + " (ID: " + h.getId() + ")");
+            }
+
+        } catch (Exception e) {
+            System.err.println("❌ Errore DataSource: " + e.getMessage());
+            System.err.println("⚠️ Verificare configurazione in src/main/resources/db.properties");
+        }
+
         // Configura un look and feel moderno
         setupModernLookAndFeel();
         // Avvia l'applicazione Swing nell'Event Dispatch Thread
@@ -27,8 +48,8 @@ public class Main {
             } catch (Exception e) {
                 final String errorMsg = "Errore nell'avvio dell'applicazione: " + e.getMessage();
                 LOGGER.log(Level.SEVERE, errorMsg, e);
-                JOptionPane.showMessageDialog(null, 
-                    errorMsg, 
+                JOptionPane.showMessageDialog(null,
+                    errorMsg,
                     "Errore", JOptionPane.ERROR_MESSAGE);
             }
         });

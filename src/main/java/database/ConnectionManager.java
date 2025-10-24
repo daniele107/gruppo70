@@ -93,19 +93,109 @@ public class ConnectionManager {
     }
     /**
      * Testa la presenza delle tabelle nel database
-     * 
+     *
      * @throws DataAccessException se si verifica un errore durante il test
      */
     public void testTables() {
         try (Connection conn = getConnection();
              java.sql.Statement stmt = conn.createStatement()) {
-            String[] tables = {"utente", "hackathon", "team", "registrazione", "progress", "valutazione"};
+            String[] tables = {"utente", "hackathon", "team", "registrazione", "progress", "valutazione", "documents"};
             LOGGER.info("Verifica tabelle nel database:");
             for (String table : tables) {
                 checkTableExists(stmt, table);
             }
+            // Verifica specifica per la tabella documents e la colonna contenuto
+            checkDocumentsTableSchema(stmt);
+            // Applica migrazione per la colonna contenuto se necessario
+            applyDocumentsContentMigration(stmt);
         } catch (SQLException e) {
             throw new DataAccessException("ConnectionManager.testTables fallita", e);
+        }
+    }
+
+    /**
+     * Applica la migrazione per aggiungere la colonna contenuto alla tabella documents
+     *
+     * @param stmt Statement SQL da utilizzare
+     */
+    private void applyDocumentsContentMigration(java.sql.Statement stmt) {
+        try {
+            // Verifica se la colonna contenuto già esiste
+            try (java.sql.ResultSet rs = stmt.executeQuery(
+                "SELECT column_name FROM information_schema.columns " +
+                "WHERE table_name = 'documents' AND column_name = 'contenuto'")) {
+                if (rs.next()) {
+                    LOGGER.log(Level.INFO, "✅ Colonna ''contenuto'' già presente - migrazione non necessaria");
+                    return;
+                }
+            }
+
+            LOGGER.log(Level.INFO, "🔄 Applicazione migrazione: aggiunta colonna ''contenuto''...");
+
+            // Aggiunge la colonna contenuto
+            stmt.execute("ALTER TABLE documents ADD COLUMN IF NOT EXISTS contenuto BYTEA");
+            LOGGER.log(Level.INFO, "✅ Colonna ''contenuto'' aggiunta");
+
+            // Aggiunge commento alla colonna
+            stmt.execute("COMMENT ON COLUMN documents.contenuto IS 'Binary content of the uploaded file'");
+            LOGGER.log(Level.INFO, "✅ Commento colonna ''contenuto'' aggiunto");
+
+            // Crea indice per query ottimizzate
+            stmt.execute("CREATE INDEX IF NOT EXISTS idx_documents_contenuto ON documents(id) WHERE contenuto IS NOT NULL");
+            LOGGER.log(Level.INFO, "✅ Indice ''idx_documents_contenuto'' creato");
+
+            LOGGER.log(Level.INFO, "🎉 Migrazione V1005__add_document_content.sql applicata con successo!");
+
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "❌ Errore nell'applicazione migrazione contenuto documenti: {0}", e.getMessage());
+            LOGGER.log(Level.WARNING, "⚠️ Eseguire manualmente la migrazione V1005__add_document_content.sql");
+        }
+    }
+
+    /**
+     * Verifica lo schema della tabella documents e la presenza della colonna contenuto
+     *
+     * @param stmt Statement SQL da utilizzare
+     */
+    private void checkDocumentsTableSchema(java.sql.Statement stmt) {
+        try {
+            // Verifica se la tabella documents esiste
+            try (java.sql.ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM documents")) {
+                if (rs.next()) {
+                    LOGGER.log(Level.INFO, "✅ Tabella ''documents'' trovata");
+                }
+            }
+
+            // Verifica se la colonna contenuto esiste
+            try (java.sql.ResultSet rs = stmt.executeQuery(
+                "SELECT column_name FROM information_schema.columns " +
+                "WHERE table_name = 'documents' AND column_name = 'contenuto'")) {
+                if (rs.next()) {
+                    LOGGER.log(Level.INFO, "✅ Colonna ''contenuto'' presente nella tabella documents");
+                } else {
+                    LOGGER.log(Level.WARNING, "❌ Colonna ''contenuto'' NON presente nella tabella documents");
+                    LOGGER.log(Level.WARNING, "⚠️ Eseguire la migrazione: V1005__add_document_content.sql");
+                }
+            }
+
+            // Mostra lo schema completo della tabella documents
+            try (java.sql.ResultSet rs = stmt.executeQuery(
+                "SELECT column_name, data_type, is_nullable " +
+                "FROM information_schema.columns " +
+                "WHERE table_name = 'documents' " +
+                "ORDER BY ordinal_position")) {
+                LOGGER.log(Level.INFO, "Schema tabella documents:");
+                while (rs.next()) {
+                    String columnName = rs.getString("column_name");
+                    String dataType = rs.getString("data_type");
+                    String isNullable = rs.getString("is_nullable");
+                    LOGGER.log(Level.INFO, "  - {0}: {1} (nullable: {2})",
+                              new Object[]{columnName, dataType, isNullable});
+                }
+            }
+
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Errore nella verifica schema tabella documents: {0}", e.getMessage());
         }
     }
     /**

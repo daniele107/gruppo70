@@ -212,6 +212,9 @@ public class FileUploadDialog extends JDialog {
         annullaButton.addActionListener(e -> dispose());
         anteprimaButton.addActionListener(this::handlePreview);
         
+        // Aggiorna stato quando cambia il team selezionato
+        teamComboBox.addActionListener(e -> updateUploadButtonState());
+        
         // Auto-fill nome file quando viene selezionato
         nomeFileField.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -275,6 +278,12 @@ public class FileUploadDialog extends JDialog {
                     teamComboBox.addItem(new TeamItem(team, team.getNome()));
                 }
                 
+                // Seleziona automaticamente il primo team valido se disponibile
+                if (!userTeams.isEmpty()) {
+                    teamComboBox.setSelectedIndex(1); // Indice 1 = primo team (0 è "Seleziona un team...")
+                    updateUploadButtonState();
+                }
+                
                 if (userTeams.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
                         "Non fai parte di nessun team.\nContatta l'organizzatore per essere aggiunto a un team.",
@@ -325,6 +334,9 @@ public class FileUploadDialog extends JDialog {
             if (nomeFileField.getText().trim().isEmpty()) {
                 nomeFileField.setText(selectedFile.getName());
             }
+            
+            // Forza aggiornamento stato pulsante
+            updateUploadButtonState();
         }
     }
     
@@ -630,13 +642,40 @@ public class FileUploadDialog extends JDialog {
      * Aggiorna lo stato del pulsante upload
      */
     private void updateUploadButtonState() {
-        boolean canUpload = selectedFile != null && 
-                          !nomeFileField.getText().trim().isEmpty() && 
-                          teamComboBox.getSelectedItem() != null &&
-                          ((TeamItem) teamComboBox.getSelectedItem()).team != null &&
-                          validateFile(selectedFile) == null &&
-                          !uploadInProgress;
-        uploadButton.setEnabled(canUpload);
+        try {
+            boolean hasFile = selectedFile != null;
+            boolean hasName = nomeFileField != null && !nomeFileField.getText().trim().isEmpty();
+            
+            // Controllo semplificato per il team
+            Object selectedItem = teamComboBox.getSelectedItem();
+            boolean hasTeam = selectedItem != null;
+            if (selectedItem instanceof TeamItem) {
+                TeamItem item = (TeamItem) selectedItem;
+                hasTeam = item.team != null;
+            }
+            
+            boolean fileValid = selectedFile == null || validateFile(selectedFile) == null;
+            boolean notUploading = !uploadInProgress;
+            
+            // TEMPORANEO: Abilita sempre il pulsante se hai file e nome (per debug)
+            boolean canUpload = hasFile && hasName && !uploadInProgress;
+            
+            System.out.println("═══════════════════════════════════════════════════");
+            System.out.println("DEBUG updateUploadButtonState:");
+            System.out.println("  hasFile       = " + hasFile);
+            System.out.println("  hasName       = " + hasName);
+            System.out.println("  hasTeam       = " + hasTeam);
+            System.out.println("  fileValid     = " + fileValid);
+            System.out.println("  notUploading  = " + notUploading);
+            System.out.println("  canUpload     = " + canUpload);
+            System.out.println("  uploadButton will be " + (canUpload ? "ENABLED" : "DISABLED"));
+            System.out.println("═══════════════════════════════════════════════════");
+            
+            uploadButton.setEnabled(canUpload);
+        } catch (Exception e) {
+            e.printStackTrace();
+            uploadButton.setEnabled(false);
+        }
     }
     
     /**

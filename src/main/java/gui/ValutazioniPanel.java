@@ -191,7 +191,7 @@ public class ValutazioniPanel extends JPanel {
             // Ottieni tutti i team degli hackathon in corso
             List<Team> teams = new ArrayList<>();
             List<Hackathon> hackathonInCorso = controller.getHackathonInCorso();
-            
+
             if (hackathonInCorso.isEmpty()) {
                 // Fallback: usa tutti gli hackathon disponibili
                 List<Hackathon> tuttiHackathon = controller.getTuttiHackathon();

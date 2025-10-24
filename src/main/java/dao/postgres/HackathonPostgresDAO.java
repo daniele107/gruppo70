@@ -260,9 +260,21 @@ public class HackathonPostgresDAO implements HackathonDAO {
         try (Connection conn = cm.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
+
+            // DEBUG: Log the query and results
+            System.out.println("DEBUG findInCorso() - Executing SQL: " + sql);
+
+            int count = 0;
             while (rs.next()) {
-                hackathons.add(mapResultSetToHackathon(rs));
+                count++;
+                Hackathon h = mapResultSetToHackathon(rs);
+                System.out.println("DEBUG findInCorso() - Found hackathon: " + h.getNome() +
+                                 " (ID: " + h.getId() + ", Avviato: " + h.isEventoAvviato() +
+                                 ", Inizio: " + h.getDataInizio() + ", Fine: " + h.getDataFine() + ")");
+                hackathons.add(h);
             }
+            System.out.println("DEBUG findInCorso() - Total results: " + count);
+
         } catch (SQLException e) {
             logLazy(Level.SEVERE, () -> LOG_PREFIX_ERROR_DURANTE + "retrieve hackathons in progress", e);
             throw new DataAccessException("Failed to retrieve hackathons currently in progress from database" + SQL_ERROR_SUFFIX + e.getMessage(), e);

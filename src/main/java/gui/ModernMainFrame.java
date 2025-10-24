@@ -106,6 +106,18 @@ public class ModernMainFrame extends JFrame {
     public ModernMainFrame() {
         ConnectionManager connectionManager = new ConnectionManager(DataSourceFactory.createDataSource());
         this.controller = new Controller(connectionManager);
+
+        // Verifica configurazione database all'avvio
+        try {
+            System.out.println("🔍 Verifica configurazione database...");
+            connectionManager.testTables();
+            System.out.println("✅ Database configurato correttamente");
+        } catch (Exception e) {
+            System.err.println("❌ Errore configurazione database: " + e.getMessage());
+            System.err.println("⚠️ Verificare che il database sia configurato correttamente");
+            System.err.println("📖 Consultare README_DATABASE.md per le istruzioni");
+        }
+
         initializeFrame();
         createModernLayout();
         initializePanels();

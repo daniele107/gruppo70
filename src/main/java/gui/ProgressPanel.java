@@ -176,12 +176,23 @@ public class ProgressPanel extends JPanel {
      * Mostra il dialog per caricare un nuovo progresso
      */
     private void showCaricaProgressoDialog() {
-        // Usa il dialog moderno e unificato
-        FileUploadDialog uploadDialog = new FileUploadDialog((JFrame) SwingUtilities.getWindowAncestor(this), controller);
-        uploadDialog.setVisible(true);
-        
-        // Refresh data after upload
-        refreshData();
+        try {
+            // Usa FileUploadDialog che ora salva sia in documents che in progress
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            FileUploadDialog uploadDialog = new FileUploadDialog(parentFrame, controller);
+            uploadDialog.setVisible(true);
+            
+            // Refresh data after upload
+            refreshData();
+        } catch (Exception e) {
+            System.err.println("ERRORE nell'apertura del dialog Carica Progresso:");
+            e.printStackTrace();
+            
+            JOptionPane.showMessageDialog(this,
+                "Errore nell'apertura del dialog:\n" + e.getMessage(),
+                "Errore",
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
     /**
      * Mostra il dialog per aggiungere un commento giudice

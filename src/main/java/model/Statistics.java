@@ -334,11 +334,29 @@ public class Statistics {
     public double getMediaVotiPerGiudice() {
         return mediaVotiPerGiudice;
     }
-    
+
     public void setMediaVotiPerGiudice(double mediaVotiPerGiudice) {
         this.mediaVotiPerGiudice = mediaVotiPerGiudice;
     }
-    
+
+    /**
+     * Restituisce la media generale dei voti (alias per getMediaVotiGenerale)
+     *
+     * @return media generale dei voti
+     */
+    public double getMediaVoti() {
+        return mediaVotiGenerale;
+    }
+
+    /**
+     * Imposta la media generale dei voti (alias per setMediaVotiGenerale)
+     *
+     * @param mediaVoti la media generale dei voti
+     */
+    public void setMediaVoti(double mediaVoti) {
+        this.mediaVotiGenerale = mediaVoti;
+    }
+
     public int getValutazioniPendenti() {
         return valutazioniPendenti;
     }

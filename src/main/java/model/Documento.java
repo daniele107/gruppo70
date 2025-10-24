@@ -22,6 +22,7 @@ public class Documento {
     private boolean validato;
     private int validatoreId;
     private LocalDateTime dataValidazione;
+    private byte[] contenuto;
     
     /**
      * Costruttore vuoto per la creazione di istanze
@@ -67,11 +68,31 @@ public class Documento {
      * @param utenteCaricamento l'ID dell'utente che carica il file
      * @param descrizione descrizione opzionale del documento
      */
-    public Documento(int teamId, int hackathonId, String nome, String percorso, 
+    public Documento(int teamId, int hackathonId, String nome, String percorso,
                     String tipo, long dimensione, String hash, int utenteCaricamento, String descrizione) {
         this(teamId, hackathonId, nome, percorso, tipo, dimensione, utenteCaricamento);
         this.hash = hash;
         this.descrizione = descrizione;
+    }
+
+    /**
+     * Costruttore con contenuto del file
+     *
+     * @param teamId l'ID del team
+     * @param hackathonId l'ID dell'hackathon
+     * @param nome il nome del file
+     * @param percorso il percorso del file
+     * @param tipo il tipo MIME del file
+     * @param dimensione la dimensione in bytes
+     * @param hash l'hash del file per verifica integrità
+     * @param utenteCaricamento l'ID dell'utente che carica il file
+     * @param descrizione descrizione opzionale del documento
+     * @param contenuto il contenuto binario del file
+     */
+    public Documento(int teamId, int hackathonId, String nome, String percorso,
+                    String tipo, long dimensione, String hash, int utenteCaricamento, String descrizione, byte[] contenuto) {
+        this(teamId, hackathonId, nome, percorso, tipo, dimensione, hash, utenteCaricamento, descrizione);
+        this.contenuto = contenuto;
     }
     
     // Getters e Setters
@@ -187,7 +208,15 @@ public class Documento {
     public void setDataValidazione(LocalDateTime dataValidazione) {
         this.dataValidazione = dataValidazione;
     }
-    
+
+    public byte[] getContenuto() {
+        return contenuto;
+    }
+
+    public void setContenuto(byte[] contenuto) {
+        this.contenuto = contenuto;
+    }
+
     // Metodi di utilità
     
     /**

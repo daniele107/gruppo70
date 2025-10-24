@@ -21,13 +21,13 @@ public class DocumentoPostgresDAO implements DocumentoDAO {
     private final ConnectionManager connectionManager;
     
     // SQL Queries
-    private static final String SELECT_FIELDS = 
+    private static final String SELECT_FIELDS =
         "SELECT id, team_id, hackathon_id, nome, percorso, tipo, dimensione, hash, " +
-        "data_caricamento, utente_caricamento, descrizione, validato, validatore_id, data_validazione ";
-    private static final String INSERT_DOCUMENTO = 
+        "data_caricamento, utente_caricamento, descrizione, validato, validatore_id, data_validazione, contenuto ";
+    private static final String INSERT_DOCUMENTO =
         "INSERT INTO documents (team_id, hackathon_id, nome, percorso, tipo, dimensione, hash, " +
-        "data_caricamento, utente_caricamento, descrizione, validato) " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
+        "data_caricamento, utente_caricamento, descrizione, validato, contenuto) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
     
     private static final String FIND_BY_ID = 
         SELECT_FIELDS + "FROM documents WHERE id = ?";
@@ -115,6 +115,7 @@ public class DocumentoPostgresDAO implements DocumentoDAO {
             statement.setInt(9, documento.getUtenteCaricamento());
             statement.setString(10, documento.getDescrizione());
             statement.setBoolean(11, documento.isValidato());
+            statement.setBytes(12, documento.getContenuto());
             
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -471,12 +472,14 @@ public class DocumentoPostgresDAO implements DocumentoDAO {
         documento.setDescrizione(resultSet.getString("descrizione"));
         documento.setValidato(resultSet.getBoolean("validato"));
         documento.setValidatoreId(resultSet.getInt("validatore_id"));
-        
+
         Timestamp dataValidazione = resultSet.getTimestamp("data_validazione");
         if (dataValidazione != null) {
             documento.setDataValidazione(dataValidazione.toLocalDateTime());
         }
-        
+
+        documento.setContenuto(resultSet.getBytes("contenuto"));
+
         return documento;
     }
 }

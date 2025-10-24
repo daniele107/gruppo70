@@ -79,6 +79,18 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         ConnectionManager connectionManager = new ConnectionManager(DataSourceFactory.createDataSource());
         this.controller = new Controller(connectionManager);
+
+        // Verifica configurazione database all'avvio
+        try {
+            System.out.println("🔍 Verifica configurazione database...");
+            connectionManager.testTables();
+            System.out.println("✅ Database configurato correttamente");
+        } catch (Exception e) {
+            System.err.println("❌ Errore configurazione database: " + e.getMessage());
+            System.err.println("⚠️ Verificare che il database sia configurato correttamente");
+            System.err.println("📖 Consultare README_DATABASE.md per le istruzioni");
+        }
+
         setupModernLookAndFeel();
         initializeFrame();
         initializeMenuBar();
@@ -712,8 +724,16 @@ public class MainFrame extends JFrame {
      */
     private void showProgressUploadDialog() {
         SwingUtilities.invokeLater(() -> {
-            FileUploadDialog dialog = new FileUploadDialog(this, controller);
-            dialog.setVisible(true);
+            try {
+                // Usa FileUploadDialog che ora salva sia in documents che in progress
+                FileUploadDialog dialog = new FileUploadDialog(this, controller);
+                dialog.setVisible(true);
+            } catch (Exception e) {
+                System.err.println("ERRORE nell'apertura del dialog Carica Progresso:");
+                e.printStackTrace();
+                
+                showToast("Errore nell'apertura del dialog: " + e.getMessage(), TOAST_TYPE_ERROR);
+            }
         });
     }
     

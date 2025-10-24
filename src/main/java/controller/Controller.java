@@ -1197,31 +1197,58 @@ public class Controller {
 
     public int caricaProgresso(int teamId, String titolo, String descrizione, String documentoPath) {
 
-        if (currentUser == null) {
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║ 📝 CARICAMENTO PROGRESSO");
+        System.out.println("╠══════════════════════════════════════════════════════════════╣");
+        System.out.println("║ Team ID: " + teamId);
+        System.out.println("║ Titolo: " + titolo);
+        System.out.println("║ Descrizione: " + descrizione);
+        System.out.println("║ Documento Path: " + documentoPath);
 
+        if (currentUser == null) {
+            System.out.println("║ ❌ ERRORE: Utente non autenticato");
+            System.out.println("╚══════════════════════════════════════════════════════════════╝");
             return -1;
 
         }
+
+        System.out.println("║ Utente: " + currentUser.getNome() + " " + currentUser.getCognome());
 
         // Verifica che l'utente sia membro del team
 
         if (!teamDAO.isMembro(teamId, currentUser.getId())) {
-
+            System.out.println("║ ❌ ERRORE: L'utente non è membro del team");
+            System.out.println("╚══════════════════════════════════════════════════════════════╝");
             return -1;
 
         }
+
+        System.out.println("║ ✓ Utente è membro del team");
 
         Team team = teamDAO.findById(teamId);
 
         if (team == null) {
-
+            System.out.println("║ ❌ ERRORE: Team non trovato");
+            System.out.println("╚══════════════════════════════════════════════════════════════╝");
             return -1;
 
         }
 
+        System.out.println("║ Team: " + team.getNome());
+        System.out.println("║ Hackathon ID: " + team.getHackathonId());
+
         Progress progress = new Progress(teamId, team.getHackathonId(), titolo, descrizione, documentoPath);
 
-        return progressDAO.insert(progress);
+        int progressId = progressDAO.insert(progress);
+        
+        if (progressId > 0) {
+            System.out.println("║ ✅ PROGRESSO SALVATO CON SUCCESSO! ID: " + progressId);
+        } else {
+            System.out.println("║ ❌ ERRORE: Impossibile salvare il progresso");
+        }
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
+
+        return progressId;
 
     }
 
@@ -3655,12 +3682,36 @@ public class Controller {
 
     public boolean concludeEvento(int hackathonId) {
 
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║ 🏁 CONCLUSIONE EVENTO");
+        System.out.println("╠══════════════════════════════════════════════════════════════╣");
+        System.out.println("║ Hackathon ID: " + hackathonId);
+
         try {
 
-            return hackathonDAO.concludeEvento(hackathonId);
+            Hackathon h = hackathonDAO.findById(hackathonId);
+            if (h != null) {
+                System.out.println("║ Hackathon: " + h.getNome());
+                System.out.println("║ Già avviato: " + h.isEventoAvviato());
+                System.out.println("║ Già concluso: " + h.isEventoConcluso());
+            }
+
+            boolean result = hackathonDAO.concludeEvento(hackathonId);
+            
+            if (result) {
+                System.out.println("║ ✅ EVENTO CONCLUSO CON SUCCESSO!");
+            } else {
+                System.out.println("║ ❌ ERRORE: Impossibile concludere l'evento");
+            }
+            System.out.println("╚══════════════════════════════════════════════════════════════╝");
+            
+            return result;
 
         } catch (Exception e) {
 
+            System.out.println("║ ❌ ECCEZIONE: " + e.getMessage());
+            System.out.println("╚══════════════════════════════════════════════════════════════╝");
+            e.printStackTrace();
             return false;
 
         }
@@ -3906,13 +3957,15 @@ public class Controller {
 
      * @param descrizione descrizione opzionale del documento
 
+     * @param contenuto il contenuto binario del file
+
      * @return l'ID del documento caricato o -1 se fallito
 
      */
 
     public int caricaDocumento(int teamId, String nomeFile, String percorsoFile, 
 
-                              String tipoFile, long dimensioneFile, String hashFile, String descrizione) {
+                              String tipoFile, long dimensioneFile, String hashFile, String descrizione, byte[] contenuto) {
 
         if (currentUser == null) {
 
@@ -3980,11 +4033,11 @@ public class Controller {
 
             
 
-            // Crea il documento
+            // Crea il documento con contenuto
 
             Documento documento = new Documento(teamId, team.getHackathonId(), nomeFile, 
 
-                percorsoFile, tipoFile, dimensioneFile, hashFile, currentUser.getId(), descrizione);
+                percorsoFile, tipoFile, dimensioneFile, hashFile, currentUser.getId(), descrizione, contenuto);
 
             
 
@@ -4622,11 +4675,11 @@ public class Controller {
 
             
 
-            // Verifica che l'hackathon sia avviato
+            // Verifica che l'hackathon sia concluso
 
             Hackathon hackathon = hackathonDAO.findById(hackathonId);
 
-            if (hackathon == null || !hackathon.isEventoAvviato()) {
+            if (hackathon == null || !hackathon.isEventoConcluso()) {
 
                 return false;
 
@@ -4666,48 +4719,78 @@ public class Controller {
 
             Team team = teamDAO.findById(teamId);
 
-            if (team == null) {
+            System.out.println("╔══════════════════════════════════════════════════════════════╗");
+            System.out.println("║ DEBUG validaTeamPerValutazione per teamId: " + teamId);
+            System.out.println("╠══════════════════════════════════════════════════════════════╣");
 
+            if (team == null) {
+                System.out.println("║ ❌ FALLITO: Team non trovato");
+                System.out.println("╚══════════════════════════════════════════════════════════════╝");
                 return false;
 
             }
+
+            System.out.println("║ ✓ Team trovato: " + team.getNome());
 
             
 
             // Verifica che il team abbia almeno 2 membri
 
             int numeroMembri = teamDAO.contaMembri(teamId);
+            System.out.println("║ Numero membri: " + numeroMembri);
 
             if (numeroMembri < 2) {
-
+                System.out.println("║ ❌ FALLITO: Il team ha meno di 2 membri (richiesti: 2, attuali: " + numeroMembri + ")");
+                System.out.println("╚══════════════════════════════════════════════════════════════╝");
                 return false;
 
             }
+
+            System.out.println("║ ✓ Team ha abbastanza membri (>= 2)");
 
             
 
             // Verifica che il team abbia caricato almeno un progresso
 
             List<Progress> progressi = progressDAO.findByTeam(teamId);
+            System.out.println("║ Numero progressi trovati: " + progressi.size());
 
             if (progressi.isEmpty()) {
-
+                System.out.println("║ ❌ FALLITO: Il team non ha caricato progressi");
+                System.out.println("╚══════════════════════════════════════════════════════════════╝");
                 return false;
 
             }
 
+            System.out.println("║ ✓ Team ha caricato almeno un progresso");
+            for (Progress p : progressi) {
+                System.out.println("║   - Progresso: " + p.getTitolo());
+            }
+
             
 
-            // Verifica che l'hackathon sia avviato
+            // Verifica che l'hackathon sia concluso
 
             Hackathon hackathon = hackathonDAO.findById(team.getHackathonId());
+            System.out.println("║ Hackathon trovato: " + (hackathon != null ? hackathon.getNome() : "null"));
+            System.out.println("║ Evento concluso: " + (hackathon != null && hackathon.isEventoConcluso()));
 
             // SonarLint: fixed S1126 (replace if/else boolean returns)
-
-            return hackathon != null && hackathon.isEventoAvviato();
+            boolean result = hackathon != null && hackathon.isEventoConcluso();
+            
+            if (result) {
+                System.out.println("║ ✅ VALIDAZIONE SUPERATA! Il team può essere valutato");
+            } else {
+                System.out.println("║ ❌ FALLITO: L'hackathon non è concluso");
+            }
+            System.out.println("╚══════════════════════════════════════════════════════════════╝");
+            
+            return result;
 
         } catch (Exception e) {
-
+            System.out.println("║ ❌ ERRORE ECCEZIONE: " + e.getMessage());
+            System.out.println("╚══════════════════════════════════════════════════════════════╝");
+            e.printStackTrace();
             return false;
 
         }
@@ -8959,6 +9042,20 @@ public class Controller {
         if (isValidDocumentInput(nomeFile, contenutoFile, tipoFile)) {
             try {
                 successo = processDocumentUpload(teamId, nomeFile, descrizione, tipoFile, contenutoFile);
+                
+                // IMPORTANTE: Salva anche come progresso per permettere la valutazione
+                if (successo) {
+                    try {
+                        Team team = teamDAO.findById(teamId);
+                        if (team != null) {
+                            Progress progress = new Progress(teamId, team.getHackathonId(), nomeFile, descrizione, nomeFile);
+                            int progressId = progressDAO.insert(progress);
+                            System.out.println("✅ Documento salvato anche come progresso! Progress ID: " + progressId);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("⚠️ Errore nel salvare come progresso (documento salvato comunque): " + e.getMessage());
+                    }
+                }
             } catch (Exception e) {
                 logOperazione("ERRORE_CARICAMENTO_DOCUMENTO_COMPLETO", 
                     String.format("Team %d: %s", teamId, e.getMessage()));
@@ -9037,10 +9134,10 @@ public class Controller {
 
             
 
-        // Salva nel database
+        // Salva nel database con contenuto
             int documentoId = caricaDocumento(teamId, nomeFile, percorsoFile, tipoFile, 
 
-                                            contenutoFile.length, hashFile, descrizione);
+                                            contenutoFile.length, hashFile, descrizione, contenutoFile);
 
             
 
